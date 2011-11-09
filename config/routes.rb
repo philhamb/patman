@@ -1,9 +1,9 @@
 Patman::Application.routes.draw do
-  get "pages/home"
+  root :to => "pages#home"
 
-  get "pages/admin"
+  match  '/admin', :to => 'pages#admin'
 
-  get "pages/support"
+  match '/support', :to => 'pages#support'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -54,7 +54,6 @@ Patman::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
 
   # See how all your routes lay out with "rake routes"
 
