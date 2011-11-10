@@ -50,5 +50,12 @@ describe User do
       invalid_email_user.should_not be_valid
     end
   end
+  
+  it "should reject duplicate email addresses" do
+    # Put a user with given email address in to db
+    User.create!(@attr)
+    user_with_duplicate_email = User.new(@attr)
+    user_with_duplicate_email.should_not be_valid
+  end
 end
 
