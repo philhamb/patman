@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111108121054) do
+ActiveRecord::Schema.define(:version => 20111110092624) do
 
   create_table "patients", :force => true do |t|
     t.string   "f_name"
@@ -27,5 +27,12 @@ ActiveRecord::Schema.define(:version => 20111108121054) do
   end
 
   add_index "patients", ["f_name", "s_name"], :name => "index_patients_on_f_name_and_s_name"
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
