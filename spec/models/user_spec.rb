@@ -63,6 +63,7 @@ describe User do
     user_with_duplicate_email = User.new(@attr)
     user_with_duplicate_email.should_not be_valid
   end
+
   it "should reject email addresses identical up to case" do
     upcased_email = @attr[:email].upcase
     User.create!(@attr.merge(:email => upcased_email))
@@ -106,17 +107,17 @@ describe User do
     end
 
     it "should set the encrypted password" do
-      @user.encrypted_password.should_not_be_blank
+      @user.encrypted_password.should_not be_blank
     end
     
     describe "has_password? method" do
   
       it "should be true if the passwords match" do
-        @user.has_password(@attr[:password]).should be_true
+        @user.has_password?(@attr[:password]).should be_true
       end
 
       it "should be false if the passwords don't match" do
-        @user.has_password("invalid").should be_false
+        @user.has_password?("invalid").should be_false
       end
     end
   end
