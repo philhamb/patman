@@ -1,2 +1,6 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<h1>Sign up</h1>
+<%= semantic_form_for @user do |f| %>
+    <%= f.inputs :name, :email, :password, :password_confirmation %>
+    <%= f.buttons :commit %>
+  <% end %>
+
