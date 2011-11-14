@@ -20,15 +20,23 @@ require 'spec_helper'
 
 describe Patient do
 
+
   before(:each) do
     @attr = {
-      :content => "value for content",
-      :user_id => 1
+      :f_name => "Example",
+      :s_name => "Patient",
+      :dob    => "1/2/1989",
+      :email  => "patient@example.com",
+      :mobile_no => "1234567890",
+      :landline_no => "123456789",
+      :occupation  => "Manager",
+      :interests   => "triathlon",
+      :gender      => "male"
     }
   end
 
   it "should create a new instance given valid attributes" do
-    Micropost.create!(@attr)
+    Patient.create!(@attr)
   end
 end
 
