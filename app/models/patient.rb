@@ -17,7 +17,8 @@
 #
 
 class Patient < ActiveRecord::Base
-  attr_accessible :f_name , :s_name , :dob , :email ,
-                  :mobile_no ,:landline_no ,:occupation ,
-                  :interests ,:gender 
+  
+  attr_accessible :f_name, :s_name, :dob, :email,
+                  :mobile_no, :landline_no, :occupation,
+                  :interests, :gender 
 end
