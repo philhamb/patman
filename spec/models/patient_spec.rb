@@ -45,13 +45,13 @@ describe Patient do
   end
 
   it "should reject first names that are too long" do
-    long_first_name = a * 51
+    long_first_name = "a" * 51
     long_first_name_patient = Patient.new(@attr.merge(:f_name => long_first_name))
     long_first_name_patient.should_not be_valid
   end  
 
   it "should reject surnames that are too long" do
-    long_surname = a * 51
+    long_surname = "a" * 51
     long_surname_patient = Patient.new(@attr.merge(:s_name => long_surname))
     long_surname_patient.should_not be_valid
   end  
