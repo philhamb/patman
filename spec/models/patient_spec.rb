@@ -77,14 +77,51 @@ describe Patient do
     no_dob_patient.should_not be_valid
   end
 
- it "should not accept a date of birth in the future" do 
+  it "should not accept a date of birth in the future" do 
     future_dob = DateTime.now + 1
     future_dob_patient = Patient.new(@attr.merge(:dob => future_dob))
     future_dob_patient.should_not be_valid 
   end 
+  
+  it "should reject a date of birth too long ago" do
+    old_dob = 151.years.ago
+    old_dob_patient = Patient.new(@attr.merge(:dob => old_dob))
+    old_dob_patient.should_not be_valid
+  end
+
+  it "should reject a short or long mobile number" do
+    numbers = %w["1"* 6 "1"* 20]
+    numbers.each do |number|
+      invalid_mobile_patient = Patient.new(@attr.merge(:mobile_no => number))
+    invalid_mobile_patient.should_not be_valid
+    end
+  end
+  
+  it "should reject a short or long landline number" do
+    numbers = %w["1"* 6 "1"* 20]
+    numbers.each do |number|
+      invalid_landline_patient = Patient.new(@attr.merge(:landline_no => number))
+    invalid_landline_patient.should_not be_valid
+    end
+  end
+
+  it "should reject over long occupation" do
+    long_oc = "a" * 201
+    long_oc_patient = Patient.new(@attr.merge(:occupation => long_oc))
+    long_oc_patient.should_not be_valid
+   end
+
+  it "should reject over long interests" do
+   long_int = "a" * 201
+   long_int_patient = Patient.new(@attr.merge(:interests => long_int))
+   long_int_patient.should_not be_valid
+  end
 
 
-
+  it "should make gender male or female" do
+    wrong_gender_patient = Patient.new(@attr.merge(:gender => "wrong"))
+    wrong_gender_patient.should_not be_valid
+  end
 
 end
 

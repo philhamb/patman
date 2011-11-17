@@ -24,18 +24,34 @@ class Patient < ActiveRecord::Base
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  validates  :f_name,  :presence  => true,
-                       :length    => { :maximum => 50}  
-  validates  :s_name,  :presence  => true,
-                       :length    => { :maximum => 50}
-  validates  :email,   :format    => { :with    => email_regex}    
+  validates  :f_name,      :presence  => true,
+                           :length    => { :maximum => 50 }  
+  validates  :s_name,      :presence  => true,
+                           :length    => { :maximum => 50 }
+  validates  :email,       :format    => { :with    => email_regex }    
    
- validate   :dob_future
- validates  :dob,     :presence  => true
-
+  validate   :dob_old  
+  validate   :dob_future 
+  validates  :dob,         :presence  => true
+  validates  :mobile_no,   :length    => { :in => 7..19 }
+  validates  :landline_no, :length    => { :in => 7..19 }
+  validates  :gender,      :inclusion => { :in => %w(male female) }
+  validates  :occupation,  :length    => { :maximum => 200 }
+  validates  :interests,   :length    => { :maximum => 200 }
   def dob_future
     errors.add(:dob, "Date of birth cannot be in the future") if !dob.blank? and dob.future?
   end 
- 
+  
+  def dob_old 
+    
+    errors.add(:dob, "Patient cannot be over 150 years old") if !dob.blank? and dob < 150.years.ago.to_date
+  end
+  
 end
+
+
+
+
+
+
 
