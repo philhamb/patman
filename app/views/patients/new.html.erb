@@ -1,6 +1,8 @@
 <h1>New Patient</h1>
-  <div class="span-8">
+ 
     <%= form_for(@patient) do |f| %>
+    <%= render 'shared/error_messages', :object => f.object %>
+  <div class="span-8">
     <div class="field">
       <%= f.label :f_name, "First Name" %><br />
       <%= f.text_field :f_name %>
@@ -41,10 +43,10 @@
     </div>
   
     <div class="field">
-      <%= f.label :gender %><br />
-      <%= f.text_field :gender %>
-    
-    
+    <%= f.label :gender ,"Male" %>   
+    <%= f.radio_button  :gender, :male %>
+    <%= f.label :gender ,"Female" %> 
+    <%= f.radio_button :gender, :female %>
     </div> 
   
   

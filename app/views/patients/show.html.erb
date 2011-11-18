@@ -1,0 +1,15 @@
+</h1>
+<table class="profile" summary="Profile information">
+  <tr>
+    <td class="main">
+      <h1>
+       
+        <%= @patient.f_name %> <%= @patient.s_name %> 
+      </h1>
+    </td>
+    <td class="sidebar round">
+      <strong>Name</strong> <%= @patient.f_name %><%= @patient.s_name %> <br />
+      <strong>URL</strong>  <%= link_to user_path(@patient), @patient %>
+    </td>
+  </tr>
+</table>
