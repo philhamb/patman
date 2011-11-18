@@ -1,6 +1,7 @@
 class PatientsController < ApplicationController
   def new
-    @title = "New Patient"
+    @patient = Patient.new
+    @title   = "New Patient"
   end
 
 end

@@ -1,12 +1,13 @@
 Patman::Application.routes.draw do
 
-  get "patients/new"
+ 
 
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
   resources :patients
    
-
+  match '/new_p',   :to => 'patients#new'
+  
   match '/signup',  :to => 'users#new'
   match '/signin',  :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
