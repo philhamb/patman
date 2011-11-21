@@ -1,0 +1,55 @@
+<%= render 'shared/error_messages', :object => f.object %>
+<div class="span-8">
+    <div class="field">
+      <%= f.label :f_name, "First Name" %><br />
+      <%= f.text_field :f_name %>
+    </div>
+
+    <div class="field">
+       <%= f.label :s_name, "Surname" %><br />
+      <%= f.text_field :s_name %>
+    </div>
+  
+    <div class="field">
+      <%= f.label :email, "Email Address" %><br />
+      <%= f.text_field :email %>
+    </div>
+    <div class="field">
+      <%= f.label :dob, "Date of Birth" %><br />
+      <%= date_select("patient", "dob", :start_year => Time.now.year,:prompt => 
+                      { :day => 'Day', :month => 'Month', 
+                      :year => 'Select Year' },:end_year => Time.now.year-150) %>
+    </div> 
+  </div  
+ 
+  <div class="span-8 last">
+
+    <div class="field">
+      <%= f.label :mobile_no, "Mobile" %><br /> 
+      <%= f.text_field :mobile_no %>
+    </div>
+  
+    <div class="field">
+      <%= f.label :landline_no, "Landline" %><br />
+      <%= f.text_field :landline_no  %>
+    </div>
+  
+    <div class="field">
+      <%= f.label :occupation %><br />
+      <%= f.text_field :occupation  %>
+    </div>
+    
+    <div class="field">
+      <%= f.label :interests %><br />
+      <%= f.text_field :interests  %>
+    </div>
+  
+    <div class="field">
+    <%= f.label :gender ,"Male" %>   
+    <%= f.radio_button  :gender, :male %>
+    <%= f.label :gender ,"Female" %> 
+    <%= f.radio_button :gender, :female %>
+    </div> 
+  
+  
+    

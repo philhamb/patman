@@ -24,10 +24,10 @@ describe "Patients" do
           fill_in "First Name",     :with => "Example"
           fill_in "Surname",        :with => "Patient"
           fill_in "Email Address",  :with => "example@patient.com"
-          selects "1961"
-          selects "July"
-          selects "15"
-          chooses "patient_gender_male"
+          select "1961"
+          select "July"
+          select "15"
+          choose "patient_gender_male"
           click_button
           response.should have_selector("div.flash.success",
                                         :content => "New patient")

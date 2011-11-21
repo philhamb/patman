@@ -8,4 +8,11 @@
   Factory.sequence :email do |n|
     "person-#{n}@example.com"
   end
-
+  Factory.define :patient do |patient|
+    patient.f_name                  "Phil"
+    patient.s_name                 "Hambly"
+    patient.email                  "philhambly@example.com"
+    patient.dob                    "15-7-1961"
+    patient.gender                 "male"
+  end
+    

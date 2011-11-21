@@ -1,15 +1,50 @@
 </h1>
-<table class="profile" summary="Profile information">
+<table  summary="Profile information" class= "large">
   <tr>
-    <td class="main">
-      <h1>
+    <td class="main" colspan="2"> 
+      <h3>
        
         <%= @patient.f_name %> <%= @patient.s_name %> 
-      </h1>
+      </h3>
     </td>
-    <td class="sidebar round">
-      <strong>Name</strong> <%= @patient.f_name %><%= @patient.s_name %> <br />
-      <strong>URL</strong>  <%= link_to user_path(@patient), @patient %>
-    </td>
+    
+    
   </tr>
+    <tr>
+       <td>Patient aged <%= @age %></td><td> Born <%= @dob %></td>
+    </tr>
+    <% unless @patient.email.blank? %>
+    <tr>
+      <td> Email Address</td><td> <%= @patient.email %></td>
+    </tr>
+    <% end %>
+    <tr>
+      <td>Mobile: <%= @patient.mobile_no %> </td>
+      
+      
+      <td><% unless @patient.landline_no.blank?  %>
+      Landline: <%= @patient.landline_no %>
+      <% end %></td>
+      </tr>
+  <% unless @patient.occupation.blank? %>
+    <tr>
+      <td>Occupation </td><td> <%= @patient.occupation.humanize %> </td>
+    </tr> 
+  <% end %>  
+  <% unless @patient.interests.blank? %>
+    <tr>
+      <td>Interests </td><td> <%= @patient.interests %> </td>
+    </tr> 
+  <% end %>
+    <tr>
+      <td> Gender: <%= @patient.gender %></td> <td></td>
+    </tr>
+  <tfoot>
+     <tr>
+      <td colspan="2">
+      Record created <%= time_ago_in_words(@patient.created_at, 
+                     include_seconds = false) %> ago </td>
+     </tr>
+  </tfoot>
 </table>
+
