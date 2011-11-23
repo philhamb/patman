@@ -6,6 +6,10 @@ describe "Patients" do
       it "should not make a new user" do
         lambda do
           visit new_p_path
+          user = Factory(:user)
+          fill_in :email,    :with => user.email
+          fill_in :password, :with => user.password
+          click_button
           fill_in "First Name",     :with => ""
           fill_in "Surname",        :with => ""
           fill_in "Email Address",  :with => ""
@@ -21,6 +25,10 @@ describe "Patients" do
       it "should make a new patient" do
         lambda do
           visit new_p_path
+          user = Factory(:user)
+          fill_in :email,    :with => user.email
+          fill_in :password, :with => user.password
+          click_button
           fill_in "First Name",     :with => "Example"
           fill_in "Surname",        :with => "Patient"
           fill_in "Email Address",  :with => "example@patient.com"

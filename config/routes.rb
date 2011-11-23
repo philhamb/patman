@@ -16,7 +16,7 @@ Patman::Application.routes.draw do
   match  '/admin',  :to => 'pages#admin'
   match '/support', :to => 'pages#support'
 
-  root              :to => "pages#home"
+  root              :to => "patients#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

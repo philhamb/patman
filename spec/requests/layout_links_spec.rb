@@ -2,40 +2,9 @@ require 'spec_helper'
 
 describe "LayoutLinks" do
 
-  it "should have a Home page at '/'" do
-    get '/'
-    response.should have_selector('title', :content => "Home")
-  end
-
-  it "should have a Admin page at '/admin'" do
-    get '/admin'
-    response.should have_selector('title', :content => "Admin")
-  end
-
-  it "should have an Support page at '/support'" do
-    get '/support'
-    response.should have_selector('title', :content => "Support")
-  end
-  it "should have a page at '/signup'" do
-    get '/signup'
-    response.should have_selector('title', :content => "Sign up")
-  end
-  it "should have a page at '/new_patient'" do
-    get '/new_p'
-    response.should have_selector('title', :content => "New Patient")
-  end
+  
     
-   it "should have the right links on the layout" do
-    visit root_path
-    click_link "Admin"
-    response.should have_selector('title', :content => "Admin")
-    click_link "Support"
-    response.should have_selector('title', :content => "Support")
-    click_link "Home"
-    response.should have_selector('title', :content => "Home")
-    click_link "Sign up now!"
-    response.should have_selector('title', :content => "Sign up")
-  end
+   
 
   describe "when not signed in" do
     it "should have a signin link" do
@@ -55,16 +24,36 @@ describe "LayoutLinks" do
       click_button
     end
     
+    it "should have a Patients page at '/'" do
+      get '/'
+      response.should have_selector('title', :content => "All patients")
+    end
+
+    it "should have a page at '/users'" do
+      get '/users'
+      response.should have_selector('title', :content => "All users")
+    end
+ 
+    it "should have a page at '/new_p'" do
+      get '/new_p'
+      response.should have_selector('title', :content => "New Patient")
+    end
+    
     it "should have a signout link" do
       visit root_path
       response.should have_selector("a", :href => signout_path,
                                          :content => "Sign out")
     end
     
-    it "should have a profile link" do
+    it "should have a users link" do
       visit root_path
-      response.should have_selector("a", :href => user_path(@user),
-                                         :content => "Profile")
+      response.should have_selector("a", :href => users_path,
+                                         :content => "Users")
+    end                                       
+    it "should have a new patient link" do
+      visit root_path
+      response.should have_selector("a", :href => new_patient_path,
+                                      :content => "New patient")
     end
   end
 end

@@ -1,4 +1,6 @@
 class PatientsController < ApplicationController
+before_filter :authenticate
+
   def new
     @patient = Patient.new
     @title   = "New Patient"
@@ -43,6 +45,12 @@ class PatientsController < ApplicationController
       render 'edit'
     end
   end
+
+ private
+    
+    def authenticate
+      deny_access unless signed_in?
+    end
 end
 
 
