@@ -31,8 +31,8 @@ before_filter :authenticate
   end
   
   def edit
-    @patient = Patient.find(params[:id])
-    @title = "Edit patient"
+   @patient = Patient.find(params[:id])
+   @title = "Edit patient"
   end
   
   def update
