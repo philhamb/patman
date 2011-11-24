@@ -1,6 +1,6 @@
 class PatientsController < ApplicationController
 before_filter :authenticate
-
+before_filter :admin_user,   :only => :destroy
   def new
     @patient = Patient.new
     @title   = "New Patient"
@@ -45,14 +45,22 @@ before_filter :authenticate
       render 'edit'
     end
   end
+  
+   def destroy
+    Patient.find(params[:id]).destroy
+    flash[:success] = "Patient destroyed."
+    redirect_to patients_path
+  end
 
  private
     
     def authenticate
       deny_access unless signed_in?
     end
+    
+    def admin_user
+      redirect_to(root_path) unless current_user.admin?
+    end
 end
-
-
 
 

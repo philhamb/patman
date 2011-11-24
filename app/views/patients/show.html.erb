@@ -1,9 +1,17 @@
 </h1>
+<nav class="round">
+    <ul>
+      <!--<li><%= link_to "Edit" , edit_patient_path %> </li> -->
+      <li><%= link_to "Edit" , { :action => :edit} %> </li>
+      <li><%= link_to "Delete",  @patient, :method => :delete, :confirm => "You sure?",
+                                :title => "Delete #{@patient.f_name} #{@patient.s_name}" %> </li>
+    </ul>
+  </nav>
 <table  summary="Profile information" class= "large">
   <tr>
     <td class="main" colspan="2"> 
+     
       <h3>
-       
         <%= @patient.f_name %> <%= @patient.s_name %> 
       </h3>
     </td>

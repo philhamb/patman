@@ -3,7 +3,7 @@
   <%= link_to (patient.f_name + " " + patient.s_name) , patient %>
   <% if current_user.admin? %>
   | <%= link_to "Edit" , edit_patient_path(patient) %> 
-  | <%= link_to "delete", patient, :method => :delete, :confirm => "You sure?",
+  | <%= link_to "Delete", patient, :method => :delete, :confirm => "You sure?",
                                 :title => "Delete #{patient.f_name} #{patient.s_name}" %>
   <% end %>
 </li>

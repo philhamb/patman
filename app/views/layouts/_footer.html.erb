@@ -1,8 +1,16 @@
 <footer>
   <nav class="round">
     <ul>
-      <li><%= link_to "Admin", admin_path %></li>
-      <li><%= link_to "Support", support_path %></li>
+     
+      <% if signed_in? %>
+     <li><%= link_to "Users", users_path %></li>
+      
+      <li><%= link_to "Patients", patients_path %></li>
+      <li><%= link_to "New patient", new_patient_path %></li>
+      <li><%= link_to "Sign out", signout_path, :method => :delete %></li>
+      <% else %>
+      <li><%= link_to "Sign in", signin_path %></li>
+      <% end %>
     </ul>
   </nav>
 </footer>
