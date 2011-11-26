@@ -21,6 +21,7 @@ class Patient < ActiveRecord::Base
   attr_accessible :f_name, :s_name, :dob, :email,
                   :mobile_no, :landline_no, :occupation,
                   :interests, :gender 
+  has_many :treatments, :dependent => :destroy
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 

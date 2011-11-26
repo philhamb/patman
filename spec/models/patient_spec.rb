@@ -57,7 +57,7 @@ describe Patient do
   end  
 
   it "should accept valid email addresses" do
-    addresses = %w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]
+    addresses = %w[patient@foo.com THE_USER@foo.bar.org first.last@foo.jp]
     addresses.each do |address|
       valid_email_patient = Patient.new(@attr.merge(:email => address))
       valid_email_patient.should be_valid
@@ -65,7 +65,7 @@ describe Patient do
   end
   
   it "should reject invalid email addresses" do
-    addresses = %w[user@foo,com user_at_foo.org example.user@foo.]
+    addresses = %w[patient@foo,com patient_at_foo.org example.patient@foo.]
     addresses.each do |address|
       invalid_email_patient = Patient.new(@attr.merge(:email => address))
       invalid_email_patient.should_not be_valid
@@ -122,7 +122,32 @@ describe Patient do
     wrong_gender_patient = Patient.new(@attr.merge(:gender => "wrong"))
     wrong_gender_patient.should_not be_valid
   end
-
+  
+  
+  describe "treatment associations" do
+    
+    before(:each) do
+      @patient = Patient.create(@attr)
+      @mp1 = Factory(:treatment, :patient => @patient, :created_at => 1.day.ago)
+      @mp2 = Factory(:treatment, :patient => @patient, :created_at => 1.hour.ago)
+    end
+    
+    it "should have a treatments attribute" do
+      @patient.should respond_to(:treatments)
+    end
+    
+    it "should have the right treatments in the right order" do
+      @patient.treatments.should == [@mp2, @mp1]
+    end
+    
+    it "should destroy associated treatments" do
+      @patient.destroy
+      [@mp1, @mp2].each do |treatment|
+        Treatment.find_by_id(treatment.id).should be_nil
+      end
+    end
+  end 
 end
+
 
 

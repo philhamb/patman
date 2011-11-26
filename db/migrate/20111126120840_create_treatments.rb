@@ -9,6 +9,8 @@ class CreateTreatments < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :treatments, [ :patient_id, :user_id, :created_at]
+  end
   end
 
   def self.down

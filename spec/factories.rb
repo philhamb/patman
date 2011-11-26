@@ -16,3 +16,9 @@
     patient.gender                 "male"
   end
     
+  Factory.define :treatment do |treatment|
+  treatment.notes "Foo bar"
+  treatment.tests "Foo bar"
+  treatment.treatment "Foo bar"
+  treatment.association :patient
+end
