@@ -9,6 +9,7 @@
     "person-#{n}@example.com"
   end
   Factory.define :patient do |patient|
+    
     patient.f_name                  "Phil"
     patient.s_name                 "Hambly"
     patient.email                  "philhambly@example.com"
