@@ -18,7 +18,28 @@
                    :password_confirmation => password)
       end
      
-     10.times do 
+     20.times do 
+     
+     f_name = Faker::Name.first_name
+     s_name = Faker::Name.last_name
+     dob    = rand(70.years).ago
+     email  = Faker::Internet.email
+     mobile_no = 12345678
+     landline_no = 12345678
+     occupation = Faker::Lorem.sentence(1)
+     interests  = Faker::Lorem.sentence(2)
+     gender = ["male","female"].shuffle.first
+     Patient.create!(:f_name => f_name,
+                     :s_name => s_name,
+                     :dob    => dob,
+                     :email  => email,
+                     :mobile_no => mobile_no,
+                     :landline_no => landline_no,
+                     :occupation => occupation,
+                     :interests => interests,
+                     :gender    => gender)
+      end
+                      
      
 
       20.times do
