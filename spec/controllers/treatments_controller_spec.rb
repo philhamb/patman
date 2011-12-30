@@ -16,10 +16,15 @@ describe TreatmentsController do
                           :tests => "blaylblayblay", 
                           :treatment => "bather")
        
-       @treatments = [@treatment, second, third ]        
+       @treatments = [@treatment, second, third ]  
+       
+      20.times do
+          @treatments << Factory(:treatment, :patient => @patient, 
+                                 :notes => "Foo bar")
+      end       
     end
     it "should be successful" do
-       get :index, :patient_id => @patient.id 
+       get :index, :patient_id => @patient.id
        response.should be_success
     end
       
@@ -29,16 +34,27 @@ describe TreatmentsController do
     end
     
     it "should have an element for each treatment" do
+      mp1 = Factory(:treatment, :patient => @patient, :notes => "Foo bar")
+      mp2 = Factory(:treatment, :patient => @patient, :notes => "Baz quux")
       get :index, :patient_id => @patient.id
-       @treatments.each do |treatment|
-          response.should have_selector("li", :content => treatment.notes)
-      end
+      response.should have_selector("td", :content => mp1.notes)
+      response.should have_selector("td", :content => mp2.notes)
+    
+    end
+
+    it "should paginate treatments" do
+        get :index, :patient_id => @patient.id 
+        response.should have_selector("div.pagination")
+        
+        response.should have_selector("a",:content => "2")
+        response.should have_selector("a",:content => "Next")   
+        
     end
   end
 end
 
-
       
+  
       
       
       

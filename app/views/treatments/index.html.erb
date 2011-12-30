@@ -1,1 +1,13 @@
-<p> Patient treatment index </p>
+
+
+<h3><%= @patient.f_name%> <%=@patient.s_name %> treatment record</h3>
+<h4><%= pluralize(@treatments.count,  'treatment')%> 
+Last treatment <%= time_ago_in_words(@last_treatment, 
+                     include_seconds = false) %> ago  </h4>
+
+<%= will_paginate @treatments %>
+  <table class="treatments">
+    <%= render @treatments %>
+  </table>
+<%= will_paginate @treatments %>
+  

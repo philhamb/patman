@@ -29,18 +29,6 @@ describe Treatment do
       @Treatment.patient.should == @patient
     end
   end
-
-  describe "treatment validations" do
-  
-  it "should require a patient id" do
-      Treatment.new(@attr).should_not be_valid
-    end
-
-  it "should require non blank content for notes" do
-  @patient.treatments.build(:notes => "  ").should_not be_valid
-    end
-  end
 end
-
 
 
