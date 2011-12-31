@@ -1,0 +1,12 @@
+<nav class="round">
+    <ul>
+    <% unless @patient.treatments.empty? %>
+      <li><%= link_to "Treatments", patient_treatments_path(@patient)%></li>
+    <% end %>
+      <li><%= link_to "Edit Patient" , { :action => :edit} %> </li>
+    <% if current_user.admin? %>
+      <li><%= link_to "Delete Patient",  @patient, :method => :delete, :confirm => "You sure?",
+                                :title => "Delete #{@patient.f_name} #{@patient.s_name}" %> </li>
+    <% end %>
+    </ul>
+  </nav>

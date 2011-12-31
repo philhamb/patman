@@ -6,5 +6,6 @@ class Treatment < ActiveRecord::Base
   validates :patient_id, :presence => true
   
   default_scope :order => 'treatments.created_at DESC'
+  
    
 end

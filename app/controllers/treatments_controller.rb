@@ -1,12 +1,17 @@
 class TreatmentsController < ApplicationController
 
   def index
-    @title = "Treatment Record"
     @patient = Patient.find(params[:patient_id]) 
-    @treatments = @patient.treatments.paginate :per_page => 10,
+    if @patient.treatments.empty?
+      flash[:notice] = "No treatments exist for this patient"
+      redirect_to @patient
+    else
+      @title = "Treatment Record"
+      @number = @patient.treatments.count
+      @treatments = @patient.treatments.paginate :per_page => 8,
                    :page => params[:page]
-    @last_treatment = @treatments.first.created_at
-    
+      @last_treatment = @treatments.first.created_at
+    end
   end
 
   def show
