@@ -26,6 +26,12 @@ section h1 {
   font-size: 200%;
 }
 
+textarea {
+  width: 800px;
+  height: 100px;
+  padding: 5px;
+}
+
 /* Links */
 
 a {

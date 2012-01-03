@@ -1,0 +1,11 @@
+<h1> New Treatment </h1>
+<% form_for([@patient, @patient.treatments.build]) do |f| %>
+   <%= f.label :notes, "Notes" %></br>
+   <%= f.text_area :notes %> </br>
+   <%= f.text_area :tests %></br>
+   <%= f.text_area :treatment %>
+   <%= f.submit "Submit Treatment" %>
+   <%=  link_to "Cancel", patient_path(@patient) %>
+   
+<% end %>
+

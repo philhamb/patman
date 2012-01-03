@@ -68,6 +68,17 @@ describe TreatmentsController do
       end
     end
   end
+
+  describe "Get 'new'" do
+    before(:each) do
+          @user = test_sign_in(Factory(:user))
+          @patient = Factory(:patient)
+    end
+    it "should be successful" do
+        get 'new', :patient_id => @patient.id 
+        response.should be_success
+    end   
+  end
 end
 
       
