@@ -14,7 +14,8 @@
     patient.s_name                 "Hambly"
     patient.email                  "philhambly@example.com"
     patient.dob                    "15-7-1961"
-    patient.gender                 "male"
+    patient.gender                 "male"   
+              
   end
     
   Factory.define :treatment do |treatment|

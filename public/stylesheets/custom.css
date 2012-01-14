@@ -30,6 +30,7 @@ textarea {
   width: 800px;
   height: 100px;
   padding: 5px;
+  resize: none;
 }
 
 /* Links */

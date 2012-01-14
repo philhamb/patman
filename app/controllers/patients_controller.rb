@@ -13,7 +13,7 @@ before_filter :admin_user,   :only => :destroy
   
   def show
     @patient = Patient.find(params[:id]) 
-    @title = @patient.f_name 
+    @title = @patient.f_name + " "+ @patient.s_name
     @age = Date.today.year - @patient.dob.year
     @dob = @patient.dob.strftime("%e/%_m/%Y ")
     @start = @patient.created_at.strftime("%e/%_m/%Y ")

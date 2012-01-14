@@ -15,9 +15,27 @@ class TreatmentsController < ApplicationController
   end
 
   def new
+  
   @patient = Patient.find(params[:patient_id])
-  
-  
+  @title = "New Treatment"
   
   end
+  
+  def create
+  @patient = Patient.find(params[:patient_id])
+  @treatment = @patient.treatments.new(params[:treatment])
+  if @treatment.save
+       flash[:success] = "New treatment record created!"
+      redirect_to @patient
+    else
+      @title = "New Treatment"
+      render 'new'
+    end
+  end
+  
+  def edit
+   @patient = Patient.find(params[:patient_id])
+   @title = "Edit Treatment" 
+  end  
+  
 end
