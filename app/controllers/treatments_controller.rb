@@ -2,6 +2,7 @@ class TreatmentsController < ApplicationController
 
   def index
     @patient = Patient.find(params[:patient_id]) 
+   
     if @patient.treatments.empty?
       flash[:notice] = "No treatments exist for this patient"
       redirect_to @patient
@@ -17,6 +18,7 @@ class TreatmentsController < ApplicationController
   def new
   
   @patient = Patient.find(params[:patient_id])
+  @treatment = @patient.treatments.new(params[:treatment])
   @title = "New Treatment"
   
   end
@@ -24,7 +26,7 @@ class TreatmentsController < ApplicationController
   def create
   @patient = Patient.find(params[:patient_id])
   @treatment = @patient.treatments.new(params[:treatment])
-  if @treatment.save
+  if @treatment.update_attributes(params[:treatment])
        flash[:success] = "New treatment record created!"
       redirect_to @patient
     else
@@ -32,9 +34,10 @@ class TreatmentsController < ApplicationController
       render 'new'
     end
   end
-  
+   
   def edit
    @patient = Patient.find(params[:patient_id])
+   @treatment = @patient.treatments.find(params[:id])
    @title = "Edit Treatment" 
   end  
   
