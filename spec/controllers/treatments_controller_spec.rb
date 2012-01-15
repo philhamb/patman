@@ -129,11 +129,9 @@ end
   
   describe "GET 'edit'" do
      
-      before(:each) do
-       
-        @treatment = @patient.treatments.create(Factory.attributes_for(:treatment))
-        
-      end
+    before(:each) do       
+      @treatment = @patient.treatments.create(Factory.attributes_for(:treatment))
+    end
 
     it "should be successful" do
       get :edit, :patient_id => @patient.id, :id => @treatment.id
@@ -143,11 +141,57 @@ end
     it "should have the right title" do
       get :edit,  :patient_id => @patient.id, :id => @treatment.id
       response.should have_selector("title", :content => "Edit Treatment")
+    end   
+  end  
+
+  describe "PUT 'update'" do
+    
+    before(:each) do
+     @treatment = @patient.treatments.create(Factory.attributes_for(:treatment))  
+    end
+
+    describe "failure" do
+      
+      before(:each) do
+        @attr = { :notes => "", :tests => "", :treatment => "" }
+      end
+      
+      it "should render the 'edit' page" do
+        put :update, :patient_id => @patient.id, :id => @treatment.id, :treatment => @attr
+        response.should render_template('edit')
+      end
+      
+      it "should have the right title" do
+        put :update, :patient_id => @patient.id, :id => @treatment.id, :treatment => @attr
+        response.should have_selector("title", :content => "Edit Treatment")
+      end
     end
     
+    describe "success" do
+      
+      before(:each) do
+        @attr = { :notes => "More notes", :tests => "New tests", :treatment => "Extra treatment" }
+      end
+      
+      it "should change the patient's attributes" do
+        put :update, :patient_id => @patient.id, :id => @treatment.id, :treatment => @attr
+        @treatment.reload
+        @treatment.notes.should  == @attr[:notes]
+        @treatment.tests.should  == @attr[:tests]
+        @treatment.treatment.should == @attr[:treatment]       
+      end
+      
+      it "should redirect to the treatment index page" do
+        put :update, :patient_id => @patient.id, :id => @treatment.id, :treatment => @attr
+        response.should redirect_to(patient_treatments_path(@patient))
+      end
+      
+      it "should have a flash message" do
+        put :update, :patient_id => @patient.id, :id => @treatment.id, :treatment => @attr
+        flash[:success].should =~ /updated/
+      end
+    end  
   end  
-  
-  
 end
 
       

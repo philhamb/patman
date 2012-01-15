@@ -41,4 +41,15 @@ class TreatmentsController < ApplicationController
    @title = "Edit Treatment" 
   end  
   
+  def update
+    @patient = Patient.find(params[:patient_id])
+    @treatment = @patient.treatments.find(params[:id])
+    if @treatment.update_attributes(params[:treatment])
+      flash[:success] = "Treatment  updated."
+      redirect_to patient_treatments_path(@patient)
+    else
+      @title = "Edit Treatment"
+      render 'edit'
+    end
+  end
 end
