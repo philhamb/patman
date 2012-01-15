@@ -20,12 +20,12 @@ class TreatmentsController < ApplicationController
   @patient = Patient.find(params[:patient_id])
   @treatment = @patient.treatments.new(params[:treatment])
   @title = "New Treatment"
-  
   end
   
   def create
   @patient = Patient.find(params[:patient_id])
   @treatment = @patient.treatments.new(params[:treatment])
+  @treatment.user_id = current_user.id
   if @treatment.update_attributes(params[:treatment])
        flash[:success] = "New treatment record created!"
       redirect_to @patient
