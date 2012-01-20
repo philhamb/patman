@@ -1,6 +1,7 @@
 class PatientsController < ApplicationController
 before_filter :authenticate
 before_filter :admin_user,   :only => :destroy
+
   def new
     @patient = Patient.new
     @title   = "New Patient"
@@ -8,7 +9,9 @@ before_filter :admin_user,   :only => :destroy
   
   def index
     @title = "All patients"
-    @patients = Patient.all
+  
+    @search = Patient.search(params[:search])
+    @patients = @search.all
   end
   
   def show

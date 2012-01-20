@@ -1,4 +1,17 @@
 <h1>All patients</h1>
+ <% form_for @search do |f| %>
+  <ol class="formList">
+    <li>
+      <%= f.label :f_name_or_s_name_like, "Name" %>
+      <%= f.text_field :f_name_or_s_name_like %>
+    </li>
+    
+    <li>
+      <%= f.submit "Search" %>
+    </li>
+  </ol>
+<% end %>
+
 
 <ul class="large"  >
  <%= render @patients %>

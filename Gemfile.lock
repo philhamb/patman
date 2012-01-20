@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/railsdog/searchlogic.git
+  revision: dfe4a45f224aa84d5dcc1c1e28c598b08b7aee7a
+  specs:
+    rd_searchlogic (3.0.1)
+      activerecord (>= 3.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -111,6 +118,7 @@ DEPENDENCIES
   faker (= 0.3.1)
   gravatar_image_tag (= 1.0.0.pre2)
   rails (= 3.0.9)
+  rd_searchlogic!
   rspec-rails (= 2.6.1)
   spork (= 0.9.0.rc8)
   sqlite3 (= 1.3.3)

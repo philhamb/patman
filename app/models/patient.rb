@@ -43,16 +43,20 @@ class Patient < ActiveRecord::Base
   validates  :occupation,  :length    => { :maximum => 200 }
   validates  :interests,   :length    => { :maximum => 200 }
   
+   def full_name
+    [f_name, s_name].join(' ')
+  end
   
   
+
+
+
   def dob_future
-    errors.add(:dob, "Date of birth cannot be in the future") 
-    if !dob.blank? and dob.future?
+    errors.add(:dob, "Date of birth cannot be in the future")if !dob.blank? and dob.future?
   end 
   
   def dob_old   
-    errors.add(:dob, "Patient cannot be over 150 years old") 
-    if !dob.blank? and dob < 150.years.ago.to_date
+    errors.add(:dob, "Patient cannot be over 150 years old")if !dob.blank? and dob < 150.years.ago.to_date
   end
   
 end
