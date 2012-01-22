@@ -9,9 +9,11 @@ before_filter :admin_user,   :only => :destroy
   
   def index
     @title = "All patients"
-  
     @search = Patient.search(params[:search])
-    @patients = @search.all
+    @patients = @search.paginate(:page => params[:page], :per_page => 8)
+      if @patients.empty?
+        flash.now[:notice] = "No patient found"
+      end
   end
   
   def show

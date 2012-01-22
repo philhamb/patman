@@ -43,14 +43,10 @@ class Patient < ActiveRecord::Base
   validates  :occupation,  :length    => { :maximum => 200 }
   validates  :interests,   :length    => { :maximum => 200 }
   
-   def full_name
+  def full_name
     [f_name, s_name].join(' ')
   end
   
-  
-
-
-
   def dob_future
     errors.add(:dob, "Date of birth cannot be in the future")if !dob.blank? and dob.future?
   end 
