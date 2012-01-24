@@ -1,0 +1,19 @@
+
+<h3> Treatment for <%= @patient.full_name %> on 
+      <%=  @treatment.created_at.strftime("%e/%_m/%Y ") %> by User</h3>
+
+<table class = "profile">
+  
+  <tr>
+    <td>Notes</td>
+    <td class= "main"> <%= @treatment.notes %></td>
+  </tr>
+  <tr>
+    <td>Examinations</td>
+    <td class= "main"> <%=  @treatment.tests %></td>
+  </tr>
+  <tr>
+    <td>Treatment</td>
+    <td class= "main"> <%=  @treatment.treatment %></td>
+  </tr>
+</table>

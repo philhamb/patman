@@ -22,6 +22,15 @@ class TreatmentsController < ApplicationController
   @title = "New Treatment"
   end
   
+  def show
+  @patient = Patient.find(params[:patient_id])
+  @treatment = @patient.treatments.find(params[:id])
+  @title = "Treatment"
+  
+ 
+  
+  end
+  
   def create
   @patient = Patient.find(params[:patient_id])
   @treatment = @patient.treatments.new(params[:treatment])

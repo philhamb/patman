@@ -1,9 +1,9 @@
  <tr>
- <td><%= treatment.created_at.strftime("%e/%_m/%Y ") %> </td>
+ <td><%= link_to treatment.created_at.strftime("%e/%_m/%Y "), [@patient, treatment], :action => :show %> </td>
  <td><%= treatment.notes %> </td>
  <td><%= treatment.tests %></td>
  <td><%= treatment.treatment %></td>
- <td><%= link_to "Edit", (edit_patient_treatment_url(@patient, treatment.id )) %></td>
+ <td><%= link_to "Edit", (edit_patient_treatment_url(@patient, treatment)) %></td>
  </tr>
   
  

@@ -41,7 +41,7 @@ describe PatientsController do
       it "should have an element for each patient" do
         get :index
         @patients.each do |patient|
-          response.should have_selector("li", :content => patient.s_name)
+          response.should have_selector("td", :content => patient.s_name)
         end
       end
     end
@@ -144,6 +144,47 @@ describe PatientsController do
     end
   end
   
+  describe "Get 'show'" do
+    describe "for non-signed in users" do
+    before(:each) do
+     @patient = Factory(:patient)
+    end
+     
+      it "should deny access" do
+        get :show, :id => @patient
+        response.should redirect_to(signin_path)
+      end
+    end
+    
+    describe "for signed in users" do
+
+    before(:each) do
+     @user = test_sign_in(Factory(:user))
+     @patient = Factory(:patient)
+    end
+    
+      it "should be successful" do
+        get :show, :id => @patient
+        response.should be_success
+      end
+
+      it "should find the right patient" do 
+        get :show, :id => @patient
+        assigns(:patient).should == @patient
+      end
+
+      it "should have the right title" do
+        get :show, :id => @patient
+        response.should have_selector("title", :content => @patient.f_name)
+      end
+
+      it "should include the patients name" do
+        get :show, :id => @patient
+        response.should have_selector("h3", :content => @patient.f_name)
+      end
+    end
+  end
+
   describe "GET 'edit'" do
 
     describe "for non-signed-in users" do

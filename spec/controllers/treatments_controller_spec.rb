@@ -127,6 +127,33 @@ end
     end
   end
   
+  describe "Get 'show'" do
+  
+  before(:each) do   
+    @treatment = @patient.treatments.create(Factory.attributes_for(:treatment))
+  end
+    
+    it "should be successful" do
+      get :show, :patient_id => @patient.id, :id => @treatment.id
+      response.should be_success
+    end
+
+    it "should find the right treatment" do 
+      get :show, :patient_id => @patient.id, :id => @treatment.id
+      assigns(:treatment).should == @treatment
+    end
+
+    it "should have the right title" do
+      get :show, :patient_id => @patient.id, :id => @treatment.id
+      response.should have_selector("title", :content =>"Treatment")
+    end
+
+    it "should include the patients name" do
+      get :show, :patient_id => @patient.id, :id => @treatment.id
+      response.should have_selector("h3", :content => @patient.full_name)
+    end
+  end
+  
   describe "GET 'edit'" do
      
     before(:each) do       

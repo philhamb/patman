@@ -1,6 +1,6 @@
 <h1> Edit Treatment </h1>
 
-<%= form_for ([@patient, @treatment]) do |f| %>
+<%= form_for([@patient, @treatment]) do |f| %>
    <%= render 'fields', :f => f %>
    <%= f.submit "Update Treatment" %>
    <%=  link_to "Cancel", patient_path(@patient) %>
