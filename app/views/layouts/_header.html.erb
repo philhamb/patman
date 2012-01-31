@@ -7,13 +7,13 @@
      <li><%= link_to "Users", users_path %></li>
       
       <li><%= link_to "Patients", patients_path %></li>
-      <li><%= link_to "New patient", new_patient_path %></li>
+      <li><%= link_to "New patient", new_patient_path, :controller => "/patients", :action =>"new" %></li>
       <li><%= link_to "Sign out", signout_path, :method => :delete %></li>
       <% else %>
       <li><%= link_to "Sign in", signin_path %></li>
       <% end %>
       </ul>
-    <% unless @patient.nil? %>
+    <% unless @patient.nil? || @patient[:id].blank? %>
       <%= render 'layouts/nav_patient' %>
     <% end %>
  
