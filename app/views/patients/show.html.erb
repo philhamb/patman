@@ -1,16 +1,17 @@
-<%= render 'shared/nav' %>
+
 <table  summary="Profile information" class= "large">
   <tr>
     <td class="main" colspan="2"> 
      
       <h3>
-        <%= @patient.f_name %> <%= @patient.s_name %> 
+        <%= @patient.full_name %> 
       </h3>
     </td>  
   </tr>
     <tr>
        <td>Treatment history </td>
-       <td><%= pluralize(@patient.treatments.count,  'treatment')%> </td>
+       <td><%= link_to(pluralize(@patient.treatments.count,  'treatment'), 
+                                  patient_treatments_path(@patient)) %> </td>
     </tr>
     <tr>
        <td>Patient aged <%= @age %></td><td> Born <%= @dob %></td>

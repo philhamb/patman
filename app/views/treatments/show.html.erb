@@ -1,6 +1,10 @@
 
-<h3> Treatment for <%= @patient.full_name %> on 
-      <%=  @treatment.created_at.strftime("%e/%_m/%Y ") %> by User</h3>
+<h3> Treatment for <%= @treatment.patient.full_name %> on 
+      <%=  @treatment.created_at.strftime("%e/%_m/%Y ") %> by 
+      
+      <%= @name %>
+      
+</h3>
 
 <table class = "profile">
   

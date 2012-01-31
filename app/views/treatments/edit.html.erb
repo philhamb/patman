@@ -1,9 +1,10 @@
-<h1> Edit Treatment </h1>
+<%= render 'shared/nav' %>
+<h3> Edit Treatment </h3>
 
-<%= form_for([@patient, @treatment]) do |f| %>
+<%= form_for([@treatment]) do |f| %>
    <%= render 'fields', :f => f %>
    <%= f.submit "Update Treatment" %>
-   <%=  link_to "Cancel", patient_path(@patient) %>
+   <%=  link_to "Cancel", patient_treatments_path(@treatment.patient_id) %>
    
 <% end %>
 

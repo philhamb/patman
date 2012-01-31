@@ -9,11 +9,14 @@ before_filter :admin_user,   :only => :destroy
   
   def index
     @title = "All patients"
-    @search = Patient.search(params[:search])
-    @patients = @search.paginate(:page => params[:page], :per_page => 8)
+    @search = Patient.includes(:treatments).search(params[:search])
+    #@patients = @search.all
+    
+    @patients = @search.relation.paginate(:page => params[:page], :per_page => 8)
       if @patients.empty?
-        flash.now[:notice] = "No patient found"
-      end
+      flash.now[:notice] = "No patient found"
+    end
+   
   end
   
   def show
@@ -22,10 +25,12 @@ before_filter :admin_user,   :only => :destroy
     @age = Date.today.year - @patient.dob.year
     @dob = @patient.dob.strftime("%e/%_m/%Y ")
     @start = @patient.created_at.strftime("%e/%_m/%Y ")
+    
   end
   
   def create
     @patient = Patient.new(params[:patient])
+    @patient.user_id = current_user.id
     if @patient.save
        flash[:success] = "New patient record created!"
       redirect_to @patient

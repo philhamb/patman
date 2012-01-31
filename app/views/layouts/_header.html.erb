@@ -12,7 +12,12 @@
       <% else %>
       <li><%= link_to "Sign in", signin_path %></li>
       <% end %>
-    </ul>
+      </ul>
+    <% unless @patient.nil? %>
+      <%= render 'layouts/nav_patient' %>
+    <% end %>
+ 
   </nav>
+ 
 </header>
 

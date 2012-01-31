@@ -16,27 +16,27 @@ class TreatmentsController < ApplicationController
   end
 
   def new
-  
-  @patient = Patient.find(params[:patient_id])
-  @treatment = @patient.treatments.new(params[:treatment])
-  @title = "New Treatment"
+    @patient = Patient.find(params[:patient_id])
+    @treatment = @patient.treatments.new(params[:treatment])
+    @title = "New Treatment"
   end
   
   def show
-  @patient = Patient.find(params[:patient_id])
-  @treatment = @patient.treatments.find(params[:id])
-  @title = "Treatment"
-  
- 
-  
+    @treatment = Treatment.find(params[:id])
+    @title = "Treatment"
+    if @treatment.patient.user.nil? #remove when user field populated
+      @name = "None"
+    else 
+      @name =  @treatment.patient.user.name
+    end
   end
   
   def create
-  @patient = Patient.find(params[:patient_id])
-  @treatment = @patient.treatments.new(params[:treatment])
-  @treatment.user_id = current_user.id
-  if @treatment.update_attributes(params[:treatment])
-       flash[:success] = "New treatment record created!"
+    @patient = Patient.find(params[:patient_id])
+    @treatment = @patient.treatments.new(params[:treatment])
+    @treatment.user_id = current_user.id
+    if @treatment.update_attributes(params[:treatment])
+      flash[:success] = "New treatment record created!"
       redirect_to @patient
     else
       @title = "New Treatment"
@@ -45,17 +45,15 @@ class TreatmentsController < ApplicationController
   end
    
   def edit
-   @patient = Patient.find(params[:patient_id])
-   @treatment = @patient.treatments.find(params[:id])
-   @title = "Edit Treatment" 
+    @treatment = Treatment.find(params[:id])
+    @title = "Edit Treatment" 
   end  
   
   def update
-    @patient = Patient.find(params[:patient_id])
-    @treatment = @patient.treatments.find(params[:id])
+    @treatment = Treatment.find(params[:id])
     if @treatment.update_attributes(params[:treatment])
       flash[:success] = "Treatment  updated."
-      redirect_to patient_treatments_path(@patient)
+      redirect_to patient_treatments_path(@treatment.patient_id)
     else
       @title = "Edit Treatment"
       render 'edit'
