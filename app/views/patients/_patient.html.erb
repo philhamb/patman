@@ -9,7 +9,7 @@
   <% end %></td>
  <td><%= link_to "All" , patient_treatments_path(patient)%> &nbsp;
     <%= link_to "New" , new_patient_treatment_path(patient)%>&nbsp;
-    <%= link_to "Last" , [Treatment.first] %>&nbsp;
+    <%= link_to "Last",  patient.treatments.first %>&nbsp;
     
     
     
