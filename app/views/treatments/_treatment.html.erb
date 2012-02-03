@@ -1,5 +1,9 @@
  <tr>
  <td><%= link_to treatment.created_at.strftime("%e/%_m/%Y "), [treatment], :action => :show %> </td>
+ <td colspan = "3">Treated by:<%= treatment.user.name %> </td>
+ </tr>
+ <tr>
+ 
  <td><%= treatment.notes %> </td>
  <td><%= treatment.tests %></td>
  <td><%= treatment.treatment %></td>

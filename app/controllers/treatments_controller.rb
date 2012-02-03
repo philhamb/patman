@@ -12,6 +12,7 @@ class TreatmentsController < ApplicationController
       @treatments = @patient.treatments.paginate :per_page => 8,
                    :page => params[:page]
       @last_treatment = @treatments.first.created_at
+     
     end
   end
 

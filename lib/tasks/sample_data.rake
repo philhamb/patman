@@ -24,11 +24,12 @@
      s_name = Faker::Name.last_name
      dob    = rand(70.years).ago
      email  = Faker::Internet.email
-     mobile_no = 12345678
-     landline_no = 12345678
+     mobile_no = rand(99999999) +1000000
+     landline_no = rand(99999999) +1000000
      occupation = Faker::Lorem.sentence(1)
      interests  = Faker::Lorem.sentence(2)
      gender = ["male","female"].shuffle.first
+     created_at = rand(5.years).ago
      Patient.create!(:f_name => f_name,
                      :s_name => s_name,
                      :dob    => dob,
@@ -37,13 +38,15 @@
                      :landline_no => landline_no,
                      :occupation => occupation,
                      :interests => interests,
-                     :gender    => gender)
+                     :gender    => gender,
+                     :created_at => created_at)
       end
                       
      
 
       20.times do
         Patient.all(:limit => 6).each do |patient|
+           
            patient.treatments.create!(:notes => Faker::Lorem.sentence(3),
                                     :tests => Faker::Lorem.sentence(3),
                                     :treatment => Faker::Lorem.sentence(3))
