@@ -9,6 +9,7 @@ before_filter :admin_user,   :only => :destroy
   
   def index
     @title = "All patients"
+     
     @search = Patient.includes(:treatments).search(params[:search])
     #@patients = @search.all
     
@@ -30,7 +31,6 @@ before_filter :admin_user,   :only => :destroy
   
   def create
     @patient = Patient.new(params[:patient])
-    @patient.user_id = current_user.id
     if @patient.save
        flash[:success] = "New patient record created!"
       redirect_to @patient

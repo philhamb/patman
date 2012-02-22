@@ -22,8 +22,8 @@ class Patient < ActiveRecord::Base
                   :mobile_no, :landline_no, :occupation,
                   :interests, :gender 
 
-  belongs_to  :user
-  has_many    :treatments, :dependent => :destroy
+  has_many  :users, :through => :treatments
+  has_many    :treatments,  :dependent => :destroy
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   

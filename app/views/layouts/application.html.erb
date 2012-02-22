@@ -8,15 +8,26 @@
   </head>
   <body>
     <div class="container">
-    <%= render 'layouts/header' %>
-      <section class="round">
-        <% flash.each do |key, value| %>
-          <div class="flash <%= key %>"><%= value %></div>
-        <% end %>
-        <%= yield %>
-      </section>
-      <%= render 'layouts/footer' %>
-      <%= debug(params) if Rails.env.development? %>
+     <%= render 'layouts/header' %>
+     
+      <div class="span-18 " id="content"> 
+        <section class="round">
+          <% flash.each do |key, value| %>
+            <div class="flash <%= key %>"><%= value %></div>
+          <% end %>
+          <%= yield %>
+        </section>
+      </div>
+      <div class="span-5 last" id="sidebar">
+        <section class= "round">
+          <%= yield :sidebar %>
+        </section>
+      </div> 
+       
+      <div id="footer" class="span-18">
+        <%= render 'layouts/footer' %>
+        <%= debug(params) if Rails.env.development? %>
+      </div>
     </div>
   </body>
 </html>

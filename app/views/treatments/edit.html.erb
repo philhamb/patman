@@ -1,4 +1,7 @@
-
+<% content_for :sidebar do %>
+  <%= render "layouts/nav_main" %>
+  <%= render "layouts/nav_treatment" %>
+<% end %>
 <h3> Edit Treatment </h3>
 
 <%= form_for([@treatment]) do |f| %>

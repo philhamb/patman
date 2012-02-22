@@ -1,5 +1,7 @@
 class TreatmentsController < ApplicationController
 
+
+
   def index
     @patient = Patient.find(params[:patient_id]) 
    
@@ -8,9 +10,10 @@ class TreatmentsController < ApplicationController
       redirect_to @patient
     else
       @title = "Treatment Record"
-      @number = @patient.treatments.count
-      @treatments = @patient.treatments.paginate :per_page => 8,
+      @search = @patient.treatments.search(params[:search])
+      @treatments = @search.paginate :per_page =>  10,
                    :page => params[:page]
+      @number = @patient.treatments.count
       @last_treatment = @treatments.first.created_at
      
     end
@@ -25,10 +28,10 @@ class TreatmentsController < ApplicationController
   def show
     @treatment = Treatment.find(params[:id])
     @title = "Treatment"
-    if @treatment.patient.user.nil? #remove when user field populated
+    if @treatment.user.nil? #remove when user field populated
       @name = "None"
     else 
-      @name =  @treatment.patient.user.name
+      @name =  @treatment.user.name
     end
   end
   

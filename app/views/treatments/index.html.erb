@@ -1,12 +1,22 @@
-
+<% content_for :sidebar do %>
+  <%= render "layouts/nav_main" %>
+  <%= render "layouts/nav_patient" %>
+<% end %>
 <h3><%= @patient.f_name%> <%=@patient.s_name %> treatment record</h3>
 <h4><%= pluralize(@number,  'treatment')%>,
 
   last was <%= time_ago_in_words(@last_treatment, 
                      include_seconds = false) %> ago  </h4>
 
+    
+
   <%= will_paginate @treatments %>
-    <table class="treatments">
+    <table class="main">
+      <tr>
+        <th> <%= sort_link @search, :created_at, "Date" %></th>
+        <th> <%= sort_link @search, :user_id, "Treated By" %></th>
+        <th>Treatment</th>
+      </tr>
     <%= render @treatments %>
     </table>
   <%= will_paginate @treatments %>

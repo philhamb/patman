@@ -1,5 +1,8 @@
-
-<table  summary="Profile information" class= "large">
+<% content_for :sidebar do %>
+  <%= render "layouts/nav_main" %>
+  <%= render "layouts/nav_patient" %>
+<% end %>
+<table  summary="Profile information" >
   <tr>
     <td class="main" colspan="2"> 
      

@@ -45,11 +45,13 @@
      
 
       20.times do
+        user_id = rand(4)+1
         Patient.all(:limit => 6).each do |patient|
            
            patient.treatments.create!(:notes => Faker::Lorem.sentence(3),
                                     :tests => Faker::Lorem.sentence(3),
-                                    :treatment => Faker::Lorem.sentence(3))
+                                    :treatment => Faker::Lorem.sentence(3),
+                                    :user_id => user_id)
         end
       end
     end

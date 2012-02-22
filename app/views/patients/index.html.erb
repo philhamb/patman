@@ -1,5 +1,8 @@
-
-<h1>All patients</h1>
+<% content_for :sidebar do %>
+  <%= render "layouts/nav_main" %>
+<% end %>
+<h2>All patients</h2>
+  
  <%= form_for @search do |f| %>
   
       <%= f.label :f_name_like, "First name" %>
@@ -17,10 +20,7 @@
 <%= will_paginate @patients %>
 <table class = "main">
   <tr>
-    <th> <%= sort_link @search, :created_at, "Date registered" %></th>
-    <th> <%= sort_link @search, :f_name, "First name" %></th>
-    <th> <%= sort_link @search, :s_name, "Surname" %></th>
-    </th>
+    <th> <%= sort_link @search, :f_name, "First" %>, <%= sort_link @search, :s_name, "Surname" %></th>
     <th>Patient</th>
     <th>Treatment</th>
     <th>Evaluation</th>

@@ -1,4 +1,7 @@
-<h1>Edit user</h1>
+<% content_for :sidebar do %>
+  <%= render "layouts/nav_main" %>
+<% end %>
+<h2>Edit user</h2>
 
 <%= form_for(@user) do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>

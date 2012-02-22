@@ -1,9 +1,12 @@
-
-<h3> Treatment for <%= @treatment.patient.full_name %> on 
-      <%=  @treatment.created_at.strftime("%e/%_m/%Y ") %> by 
-     <%= @treatment.user.name %>
+<% content_for :sidebar do %>
+  <%= render "layouts/nav_main" %>
+  <%= render "layouts/nav_treatment" %>
+<% end %>
+<h3> Treatment for <%= @treatment.patient.full_name %></h3>
+ <p>    Date: <%=  @treatment.created_at.strftime("%e/%m/%Y ") %> by 
+     <%= @treatment.user.name %> </p>
       
-</h3>
+
 
 <table class = "profile">
   

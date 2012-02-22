@@ -1,7 +1,6 @@
 <tr>
- <td><%= patient.created_at.strftime("%e/%_m/%Y ") %> </td>
- <td><%= link_to patient.f_name , patient %> </td>
- <td><%= link_to patient.s_name , patient %> </td>
+ 
+ <td><%= link_to patient.full_name , patient %> </td>
  <td><%= link_to "Edit" , edit_patient_path(patient) %> 
   <% if current_user.admin? %>
      <%= link_to "Delete", patient, :method => :delete, :confirm => "You sure?",
@@ -9,11 +8,8 @@
   <% end %></td>
  <td><%= link_to "All" , patient_treatments_path(patient)%> &nbsp;
     <%= link_to "New" , new_patient_treatment_path(patient)%>&nbsp;
-    <%= link_to "Last",  patient.treatments.first %>&nbsp;
-    
-    
-    
-   </td>
+    <%= link_to "Last",  patient.treatments.last %>&nbsp;
+ </td>
  <td> New  List  Last </td>
 </tr>
   

@@ -1,4 +1,7 @@
-<h1>All users</h1>
+<% content_for :sidebar do %>
+  <%= render "layouts/nav_main" %>
+<% end %>
+<h2>All users</h2>
 
 <%= will_paginate %>
 
