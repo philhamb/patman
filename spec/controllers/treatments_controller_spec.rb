@@ -13,19 +13,19 @@ end
 
       before(:each) do
           
-          @treatment = Factory(:treatment)
-          second = Factory(:treatment, :notes => "blahblay", 
-                          :tests => "blaylblayblay", 
-                          :treatment => "bather")
-          third = Factory(:treatment, :notes  => "blahblay", 
-                          :tests => "blaylblayblay", 
-                          :treatment => "bather")
+          @treatment = Factory(:treatment, :patient => @patient, :user => @user)
+          second = Factory(:treatment, :patient => @patient, :user => @user, 
+          :notes => "blahblay", :tests => "blaylblayblay", :treatment => "bather")
+          third = Factory(:treatment, :patient => @patient, :user => @user, 
+          :notes  => "blahblay", :tests => "blaylblayblay", :treatment => "bather")
        
           @treatments = [@treatment, second, third ]  
        
-      20.times do
-          @treatments << Factory(:treatment, :patient => @patient, 
-                                 :notes => "Foo bar")
+      5.times do
+          @treatments << Factory(:treatment, :patient => @patient, :user=> @user,
+                                 :notes => "etc",
+                                 :tests => "etc etc",
+                                 :treatment => "Foo bar")
         end       
       end
     
@@ -40,14 +40,25 @@ end
       end
     
       it "should have an element for each treatment" do
-        mp1 = Factory(:treatment, :patient => @patient, :notes => "Foo bar")
-        mp2 = Factory(:treatment, :patient => @patient, :notes => "Baz quux")
+            
+        mp1 = Factory(:treatment, :patient => @patient, :user=> @user, :notes => "yes", 
+                      :tests => "no", :treatment => "More same")
+        mp2 = Factory(:treatment, :patient => @patient, :user=> @user, :notes => "yes", 
+                      :tests => "no", :treatment => "Baz quux")
         get :index, :patient_id => @patient.id
-        response.should have_selector("td", :content => mp1.notes)
-        response.should have_selector("td", :content => mp2.notes)
+        response.should have_selector("td", :content => mp1.treatment)
+        response.should have_selector("td", :content => mp2.treatment)
       end
 
       it "should paginate treatments" do
+        20.times do
+          @treatments << Factory(:treatment, 
+                                 :patient => @patient, 
+                                 :user => @user,
+                                 :notes => "etc",
+                                 :tests => "etc etc",
+                                 :treatment => "Foo bar")
+        end       
           get :index, :patient_id => @patient.id 
           response.should have_selector("div.pagination")
         
@@ -130,7 +141,7 @@ end
   describe "Get 'show'" do
   
   before(:each) do   
-    @treatment = @patient.treatments.create(Factory.attributes_for(:treatment))
+    @treatment = Factory(:treatment, :patient => @patient, :user => @user)
   end
     
     it "should be successful" do
@@ -139,7 +150,7 @@ end
     end
 
     it "should find the right treatment" do 
-      get :show, :patient_id => @patient.id, :id => @treatment.id
+      get :show, :patient_id => @treatment.patient.id, :id => @treatment.id
       assigns(:treatment).should == @treatment
     end
 

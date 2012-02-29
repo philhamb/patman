@@ -10,7 +10,7 @@
 #  mobile_no   :integer
 #  landline_no :integer
 #  occupation  :string(255)
-#  interests     :string(255)
+#  interests   :string(255)
 #  gender      :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
@@ -22,9 +22,10 @@ class Patient < ActiveRecord::Base
                   :mobile_no, :landline_no, :occupation,
                   :interests, :gender 
 
-  has_many  :users, :through => :treatments
-  has_many    :treatments,  :dependent => :destroy
-
+  has_many  :users,       :through   => :treatments
+  has_many  :treatments,  :dependent => :destroy
+  has_many  :evaluations, :dependent => :destroy
+  
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
   

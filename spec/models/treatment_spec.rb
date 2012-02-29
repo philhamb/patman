@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: treatments
+#
+#  id         :integer         not null, primary key
+#  notes      :text
+#  tests      :text
+#  treatment  :text
+#  patient_id :integer
+#  user_id    :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 require 'spec_helper'
 
 describe Treatment do

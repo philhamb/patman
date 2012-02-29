@@ -10,8 +10,8 @@ class TreatmentsController < ApplicationController
       redirect_to @patient
     else
       @title = "Treatment Record"
-      @search = @patient.treatments.search(params[:search])
-      @treatments = @search.paginate :per_page =>  10,
+      @search = @patient.treatments.includes(:user).search(params[:search])
+      @treatments = @search.relation.paginate :per_page =>  10,
                    :page => params[:page]
       @number = @patient.treatments.count
       @last_treatment = @treatments.first.created_at

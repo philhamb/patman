@@ -5,11 +5,10 @@
   
  <%= form_for @search do |f| %>
   
-      <%= f.label :f_name_like, "First name" %>
-      <%= f.text_field :f_name_contains, :size => 15 %>
-      <%= f.label :s_name_like, "Surname" %>
-      <%= f.text_field :s_name_contains, :size => 15 %>
-    
+      <%= f.label :full_name_like, "First or Surname" %>
+      <%= f.text_field :f_name_or_s_name_contains, :size => 15 %>
+      
+      
     
     
       <%= f.submit "Search" %>

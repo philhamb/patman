@@ -10,7 +10,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120218152612) do
+ActiveRecord::Schema.define(:version => 20120228081706) do
+
+  create_table "evaluations", :force => true do |t|
+    t.string   "symptoms"
+    t.string   "onset"
+    t.string   "trauma_history"
+    t.string   "medical_history"
+    t.string   "current_health"
+    t.string   "evaluation"
+    t.integer  "patient_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
 
   create_table "patients", :force => true do |t|
     t.string   "f_name"

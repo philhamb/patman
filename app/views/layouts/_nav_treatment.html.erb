@@ -1,7 +1,7 @@
 <nav>
   <ul>
     
-    <li><%= link_to_unless_current("Patient Details",  patient_path(@patient))%>
+    <li><%= link_to_unless_current("Patient Details",  patient_path(@treatment.patient))%>
     </li></br>
     <li><%= link_to_unless_current("Edit Patient", edit_patient_path(@patient))%> 
     </li></br>

@@ -137,7 +137,7 @@ describe Patient do
     end
     
     it "should have the right treatments in the right order" do
-      @patient.treatments.should == [@mp2, @mp1]
+      @patient.treatments.should == [@mp1, @mp2]
     end
     
     it "should destroy associated treatments" do

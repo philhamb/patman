@@ -1,11 +1,12 @@
 Patman::Application.routes.draw do
 
- 
-
+  
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
   resources :patients, :shallow => true do
-    resources :treatments 
+    resources :treatments
+    resources :evaluations
+    
   end
    
   
@@ -17,7 +18,7 @@ Patman::Application.routes.draw do
 
   match  '/admin',  :to => 'pages#admin'
   match '/support', :to => 'pages#support'
-
+  match '/new_p',    :to => 'patients#new'
   root              :to => "patients#index"
 
   # The priority is based upon order of creation:

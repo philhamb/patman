@@ -23,4 +23,17 @@
   treatment.tests "Foo bar"
   treatment.treatment "Foo bar"
   treatment.association :patient
-end
+  end
+  
+  Factory.define :evaluation do |eval|
+  eval.symptoms "Foo bar Foo bar"
+  eval.onset  "Foo bar"
+  eval.trauma_history "Foo bar"
+  eval.medical_history "Foo bar"
+  eval.current_health "Foo bar"
+  eval.evaluation "Foo bar"
+  eval.association :patient
+  end
+  
+  
+   
