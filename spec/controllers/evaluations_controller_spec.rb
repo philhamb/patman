@@ -9,7 +9,7 @@ describe EvaluationsController do
   end
   
   describe "GET 'index'" do
-    describe "For patient with treatment records" do
+    describe "For patient with evaluation records" do
       
       before(:each) do
         @evaluation = Factory(:evaluation, :patient => @patient, :user => @user)
@@ -70,5 +70,56 @@ describe EvaluationsController do
       response.should have_selector("title", :content => "New Evaluation")
     end
   end
+  
+  describe "Post 'create'" do
+    
+   describe "failure" do
+      before(:each) do
+        @attr = { :patient => @patient, :user => @user,
+                  :symptoms => "",
+                  :evaluation => ""}
+      end
 
+      it "should not create a new evaluation" do
+        lambda do
+           post :create, :patient_id => @patient.id, :Evaluation => @attr
+        end.should_not change(Evaluation, :count)
+      end
+
+      it "should have the right title" do
+        post :create,:patient_id => @patient.id, :evaluation => @attr
+        response.should have_selector("title", :content => "New Evaluation")
+      end
+
+      it "should render the 'new' page" do
+        post :create, :patient_id => @patient.id, :evaluation => @attr
+        response.should render_template('new')
+      end
+    end
+    
+    describe "Success" do
+      before(:each) do
+          @attr = { :patient => @patient, :user => @user, 
+                       :symptoms => "yes", 
+                       :onset => "no", 
+                       :evaluation => "Maybe" }
+        end
+      it "should create an evaluation" do
+        lambda do
+          post :create, :patient_id => @patient.id, :evaluation => @attr
+        end.should change( Evaluation, :count).by(1)
+      end
+
+      it "should redirect to the patient page" do
+        post :create, :patient_id => @patient.id, :evaluation => @attr
+        response.should redirect_to @patient
+      end
+      
+      it "should have a welcome message" do
+        post :create, :patient_id => @patient.id, :evaluation => @attr
+        flash[:success].should =~ /New evaluation record created!/i
+      end
+    end
+  end
+  
 end

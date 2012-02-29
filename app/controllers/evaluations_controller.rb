@@ -19,6 +19,19 @@ class EvaluationsController < ApplicationController
     @title = "New Evaluation"
   end
   
+  def create
+    @patient = Patient.find(params[:patient_id])
+    @evaluation = @patient.evaluations.new(params[:evaluation])
+    @evaluation.user_id = current_user.id
+    if @evaluation.update_attributes(params[:evaluation])
+      flash[:success] = "New evaluation record created!"
+      redirect_to @patient
+    else
+      @title = "New Evaluation"
+      render 'new'
+    end
+  end
+  
   def show
   end 
 end
