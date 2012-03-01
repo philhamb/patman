@@ -122,4 +122,31 @@ describe EvaluationsController do
     end
   end
   
+  describe "Get 'show'" do
+  
+  before(:each) do   
+    @evaluation = Factory(:evaluation, :patient => @patient, :user => @user)
+  end
+    
+    it "should be successful" do
+      get :show, :patient_id => @patient.id, :id => @evaluation.id
+      response.should be_success
+    end
+
+    it "should find the right evaluation" do 
+      get :show, :patient_id => @evaluation.patient.id, :id => @evaluation.id
+      assigns(:evaluation).should == @evaluation
+    end
+
+    it "should have the right title" do
+      get :show, :patient_id => @patient.id, :id => @evaluation.id
+      response.should have_selector("title", :content =>"Evaluation")
+    end
+
+    it "should include the patients name" do
+      get :show, :patient_id => @patient.id, :id => @evaluation.id
+      response.should have_selector("h3", :content => @patient.full_name)
+    end
+  end
+  
 end

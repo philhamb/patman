@@ -33,5 +33,7 @@ class EvaluationsController < ApplicationController
   end
   
   def show
+    @evaluation = Evaluation.find(params[:id])
+    @title = "Evaluation"
   end 
 end
