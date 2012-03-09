@@ -3,9 +3,31 @@
  <%= render "layouts/nav_evaluation" %>
 <% end %>
 <h3> Evaluation for <%= @evaluation.patient.full_name %></h3>
- 
-    
-   
-   
-
-  
+ <p> Date: <%=  @evaluation.created_at.strftime("%e/%m/%Y ") %> by 
+           <%= @evaluation.user.name %> </p>
+<table class = "profile">
+ <tr>
+    <td>Symptoms</td>
+    <td class= "main"> <%= @evaluation.symptoms %></td>
+  </tr>
+  <tr>
+    <td>Onset and history</td>
+    <td class= "main"> <%=  @evaluation.onset %></td>
+  </tr>
+  <tr>
+    <td>Trauma history</td>
+    <td class= "main"> <%=  @evaluation.trauma_history %></td>
+  </tr>
+  <tr>
+    <td>Medical history</td>
+    <td class= "main"> <%=  @evaluation.medical_history %></td>
+  </tr>
+  <tr>
+    <td>Current health</td>
+    <td class= "main"> <%=  @evaluation.current_health %></td>
+  </tr>
+  <tr>
+    <td>Evaluation</td>
+    <td class= "main"> <%=  @evaluation.evaluation %></td>
+  </tr>
+</table>

@@ -1,7 +1,12 @@
  <tr>
  <td><%= link_to evaluation.created_at.strftime("%e/%m/%Y "), [evaluation], :action => :show %> </td>
  <td >  <%= evaluation.user.name %> </td>
- <td><%= evaluation.evaluation %><%= link_to "Edit", (edit_evaluation_path(evaluation)) %></td>
+ <td><%= evaluation.evaluation %></td>
+ <td><%= link_to "Edit", (edit_evaluation_path(evaluation)) %>&nbsp; 
+     <%= link_to "Delete", evaluation, :method => :delete, :confirm => "You sure?",
+             :title => "Delete Evaluation dated 
+             #{evaluation.created_at.strftime("%e/%m/%Y ")} for 
+             #{evaluation.patient.full_name}" %></td>
  </tr>
  
   

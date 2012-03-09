@@ -2,7 +2,15 @@
   <%= render "layouts/nav_main" %>
   <%= render "layouts/nav_evaluation" %>
 <% end %>
-<h3> Edit Evaluation %></h3>
+
+<h3> Edit Evaluation for <%= @evaluation.patient.full_name %></br></h3>
+
+
+<%= form_for([@patient, @evaluation]) do |f| %>
+   <%= render 'fields', :f => f %>
+   <%= f.submit "Update Evaluation" %>
+   <%=  link_to "Cancel", patient_path(@patient) %>
+<% end %>
  
     
    
