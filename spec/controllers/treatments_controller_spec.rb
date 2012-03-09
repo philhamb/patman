@@ -229,7 +229,50 @@ end
         flash[:success].should =~ /updated/
       end
     end  
-  end  
+  end 
+  
+  describe "DELETE 'destroy'" do
+    
+    before(:each) do
+      
+      @treatment = Factory(:treatment, :patient => @patient, :user => @user)
+
+    end
+    
+    
+    describe "as a non-admin user" do
+      it "should protect the page" do
+        lambda do
+          delete :destroy, :id => @treatment
+        end.should change(Treatment, :count).by(0)
+      end
+    end
+    
+    it "should redirect to index page" do
+     delete :destroy, :id => @treatment
+     response.should redirect_to(root_path)
+    end
+    
+    describe "as an admin user" do
+      
+      before(:each) do
+        @user = test_sign_in(Factory(:user, :email => "example26@rubytutorial.com", :admin => true))
+      end
+
+      it "should destroy the treatment" do
+        lambda do
+          delete :destroy, :id => @treatment
+        end.should change(Treatment, :count).by(-1)
+      end
+      
+      it "should redirect to the users page" do
+        delete :destroy, :id => @treatment
+        response.should redirect_to(root_path)
+      end
+    end
+  end
+  
+   
 end
 
       

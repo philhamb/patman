@@ -1,15 +1,24 @@
 <tr>
  
  <td><%= link_to patient.full_name , patient %> </td>
- <td><%= link_to "Edit" , edit_patient_path(patient) %> 
+ <td><%= link_to "Edit" , edit_patient_path(patient) %> &nbsp;
   <% if current_user.admin? %>
      <%= link_to "Delete", patient, :method => :delete, :confirm => "You sure?",
       :title => "Delete #{patient.f_name} #{patient.s_name}" %>
   <% end %></td>
- <td><%= link_to "All" , patient_treatments_path(patient)%> &nbsp;
-    <%= link_to "New" , new_patient_treatment_path(patient)%>&nbsp;
-    <%= link_to "Last",  patient.treatments.last %>&nbsp;
+ <td>
+    <%= link_to "New" , new_patient_treatment_path(patient)%> &nbsp;
+    <% unless patient.treatments.blank? %>
+      <%= link_to "All" , patient_treatments_path(patient)%> &nbsp;
+      <%= link_to "Last",  patient.treatments.last %>&nbsp;
+   <% end %>
  </td>
- <td> New  List  Last </td>
+ <td> 
+      <%= link_to "New" , new_patient_evaluation_path(patient)%> &nbsp;
+      <% unless patient.evaluations.blank? %>
+        <%= link_to "All" , patient_evaluations_path(patient)%> &nbsp;
+        <%= link_to "Last",  patient.evaluations.last %>&nbsp;
+      <% end %>
+ </td>
 </tr>
   

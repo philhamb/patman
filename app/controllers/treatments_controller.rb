@@ -1,5 +1,7 @@
 class TreatmentsController < ApplicationController
 
+before_filter :authenticate
+before_filter :admin_user,   :only => :destroy
 
 
   def index
@@ -62,5 +64,22 @@ class TreatmentsController < ApplicationController
       @title = "Edit Treatment"
       render 'edit'
     end
+  end
+  
+  def destroy
+    Treatment.find(params[:id]).destroy
+    flash[:success] = "Treatment destroyed "
+    redirect_to root_path
+  end
+  
+  
+  private
+  
+  def authenticate
+      deny_access unless signed_in?
+  end
+  
+  def admin_user
+      redirect_to(root_path) unless current_user.admin?
   end
 end

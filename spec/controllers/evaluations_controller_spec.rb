@@ -4,11 +4,15 @@ describe EvaluationsController do
   render_views
   
   before(:each) do
-    @user = test_sign_in(Factory(:user))
+    
     @patient = Factory(:patient)
   end
   
   describe "GET 'index'" do
+  
+  before(:each) do
+    @user = test_sign_in(Factory(:user))
+  end
     describe "For patient with evaluation records" do
       
       before(:each) do
@@ -60,6 +64,11 @@ describe EvaluationsController do
   end
 
   describe "GET 'new'" do
+  
+  before(:each) do
+    @user = test_sign_in(Factory(:user))
+  end
+  
     it "should be successful" do
       get 'new', :patient_id => @patient.id 
       response.should be_success
@@ -72,6 +81,10 @@ describe EvaluationsController do
   end
   
   describe "Post 'create'" do
+  
+  before(:each) do
+    @user = test_sign_in(Factory(:user))
+  end
     
    describe "failure" do
       before(:each) do
@@ -124,7 +137,8 @@ describe EvaluationsController do
   
   describe "Get 'show'" do
   
-  before(:each) do   
+  before(:each) do  
+    @user = test_sign_in(Factory(:user))
     @evaluation = Factory(:evaluation, :patient => @patient, :user => @user)
   end
     
@@ -148,5 +162,115 @@ describe EvaluationsController do
       response.should have_selector("h3", :content => @patient.full_name)
     end
   end
+  
+  describe "GET 'edit'" do
+     
+    before(:each) do
+      @user = test_sign_in(Factory(:user))      
+      @evaluation = @patient.evaluations.create(Factory.attributes_for(:evaluation))
+    end
+
+    it "should be successful" do
+      get :edit, :patient_id => @patient.id, :id => @evaluation.id
+      response.should be_success
+    end
+
+    it "should have the right title" do
+      get :edit,  :patient_id => @patient.id, :id => @evaluation.id
+      response.should have_selector("title", :content => "Edit Evaluation")
+    end   
+  end 
+  
+  describe "PUT 'update'" do
+    
+    before(:each) do 
+      @user = test_sign_in(Factory(:user))
+      @evaluation = @patient.evaluations.create(Factory.attributes_for(:evaluation))  
+    end
+
+    describe "failure" do
+      
+      before(:each) do
+        @attr = { :notes => "", :tests => "", :evaluation => "" }
+      end
+      
+      it "should render the 'edit' page" do
+        put :update, :patient_id => @patient.id, :id => @evaluation.id, :evaluation => @attr
+        response.should render_template('edit')
+      end
+      
+      it "should have the right title" do
+        put :update, :patient_id => @patient.id, 
+                     :id => @evaluation.id, 
+                     :evaluation => @attr
+        response.should have_selector("title", :content => "Edit evaluation")
+      end
+    end
+    
+    describe "success" do
+      
+      before(:each) do
+        @attr = { :symptoms => "More symptoms", 
+                  :onset => "last week", 
+                  :evaluation => "Extra evaluation" }
+      end
+      
+      it "should change the patient's attributes" do
+        put :update, :patient_id => @patient.id, 
+                     :id => @evaluation.id, 
+                     :evaluation => @attr
+        @evaluation.reload
+        @evaluation.symptoms.should  == @attr[:symptoms]
+        @evaluation.onset.should  == @attr[:onset]
+        @evaluation.evaluation.should == @attr[:evaluation]       
+      end
+      
+      it "should redirect to the evaluation index page" do
+        put :update, :patient_id => @patient.id, :id => @evaluation.id, :evaluation => @attr
+        response.should redirect_to(patient_evaluations_path(@patient))
+      end
+      
+      it "should have a flash message" do
+        put :update, :patient_id => @patient.id, :id => @evaluation.id, :evaluation => @attr
+        flash[:success].should =~ /updated/
+      end
+    end  
+  end 
+  
+  describe "DELETE 'destroy'" do
+    
+    before(:each) do
+     @evaluation = Factory(:evaluation, :patient => @patient, :user => @user)
+    end
+    
+    describe "as non admin user" do
+    before(:each) do
+      @user = test_sign_in(Factory(:user))
+    end
+      it "should protect the page" do
+        lambda do
+          delete :destroy, :id => @evaluation
+          response.should redirect_to(root_path)
+        end.should change(Evaluation, :count).by(0)
+      end
+    end
+   
+    
+    describe "as an admin user" do
+    before(:each) do
+      @user = test_sign_in(Factory(:user, :admin => true))
+    end
+     it "should destroy the evaluation" do
+        lambda do
+          delete :destroy, :id => @evaluation
+        end.should change(Evaluation, :count).by(-1)
+      end
+      
+      it "should redirect to the patients page" do
+        delete :destroy, :id => @evaluation
+        response.should redirect_to(root_path)
+      end
+    end
+  end  
   
 end

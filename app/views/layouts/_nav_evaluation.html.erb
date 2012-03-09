@@ -1,0 +1,21 @@
+<nav>
+  <ul>
+    
+    <li><%= link_to_unless_current("Patient Details",  patient_path(@evaluation.patient))%>
+    </li></br>
+    <li><%= link_to_unless_current("Edit Patient", edit_patient_path(@patient))%> 
+    </li></br>
+    <% if current_user.admin? %>
+      <li><%= link_to "Delete Patient", @patient, :method => :delete, 
+         :confirm => "You sure?", :title => "Delete #{@evaluation.patient.f_name} 
+         #{@evaluation.patient.s_name}"%> </li></br>
+    <% end %>
+    <% unless(@evaluation.patient.treatments).blank? %>
+      <li><%= link_to_unless_current("Treatments", patient_treatments_path(@evaluation.patient))%>
+      </li></br>
+    <% end %>
+    <li><%= link_to_unless_current("New Treatment",new_patient_treatment_path(@evaluation.patient))%>
+    </li></br>
+    
+  </ul>
+</nav>

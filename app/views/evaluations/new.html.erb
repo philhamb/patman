@@ -1,10 +1,16 @@
 <% content_for :sidebar do %>
-  <%= render "layouts/navigation" %>
+  <%= render "layouts/nav_main" %>
+  <%= render "layouts/nav_patient" %>
 <% end %>
-<h2>New Evaluation</h2>
- 
-    
-   
+
+<h3> New Evaluation for <%= @patient.f_name + " " + @patient.s_name %></br></h3>
+<h4><em> Osteopath: <%=current_user.name%></em></h4> 
+
+<%= form_for([@patient, @evaluation]) do |f| %>
+   <%= render 'fields', :f => f %>
+   <%= f.submit "Submit Evaluation" %>
+   <%=  link_to "Cancel", patient_path(@patient) %>
+<% end %>
    
 
   

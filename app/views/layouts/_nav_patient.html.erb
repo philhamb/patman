@@ -16,6 +16,11 @@
     <% end %>
     <li><%= link_to_unless_current("New Treatment",new_patient_treatment_path(@patient))%>
     </li></br>
+    <% unless(@patient.evaluations).blank? %>
+      <li><%= link_to_unless_current("Evaluations", patient_evaluations_path(@patient))%>
+      </li></br>
+    <% end %>
+    <li><%= link_to_unless_current("New Evaluation",new_patient_evaluation_path(@patient))%>
     
   </ul>
 </nav>

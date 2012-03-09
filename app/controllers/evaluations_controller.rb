@@ -1,4 +1,6 @@
 class EvaluationsController < ApplicationController
+before_filter :authenticate
+before_filter :admin_user,   :only => :destroy
 
   def index
     
@@ -17,6 +19,9 @@ class EvaluationsController < ApplicationController
   
   def new
     @title = "New Evaluation"
+    @patient = Patient.find(params[:patient_id])
+    @evaluation = @patient.evaluations.new(params[:evaluation])
+    
   end
   
   def create
@@ -36,4 +41,36 @@ class EvaluationsController < ApplicationController
     @evaluation = Evaluation.find(params[:id])
     @title = "Evaluation"
   end 
+  
+  def edit
+    @title = "Edit Evaluation"
+    @evaluation = Evaluation.find(params[:id])
+  end
+  
+  def update
+    @evaluation = Evaluation.find(params[:id])
+    if @evaluation.update_attributes(params[:evaluation])
+      flash[:success] = "Evaluation  updated."
+      redirect_to patient_evaluations_path(@evaluation.patient_id)
+    else
+      @title = "Edit evaluation"
+      render 'edit'
+    end
+  end
+  
+  def destroy
+    Evaluation.find(params[:id]).destroy
+    flash[:success] = "Evaluation destroyed "
+    redirect_to root_path
+  end
+  
+  private
+  
+  def authenticate
+      deny_access unless signed_in?
+  end
+  
+  def admin_user
+      redirect_to(root_path) unless current_user.admin?
+  end
 end
