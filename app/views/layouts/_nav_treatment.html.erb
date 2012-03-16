@@ -14,8 +14,19 @@
       <li><%= link_to_unless_current("Treatments", patient_treatments_path(@treatment.patient))%>
       </li></br>
     <% end %>
-    <li><%= link_to_unless_current("New Treatment",new_patient_treatment_path(@treatment.patient))%>
+    <li><%= link_to_unless_current("New ",new_patient_treatment_path(@treatment.patient))%>
     </li></br>
+    <% if(@patient).blank? %>
+      <li> <%= link_to_unless_current("Edit ", edit_treatment_path(@treatment)) %>
+      </li></br>
+      <li> <%= link_to_unless_current("Show ", treatment_path(@treatment)) %>
+      </li></br>
+      <% if current_user.admin? %>
+        <li> <%= link_to "Delete Treatment", @treatment, :method => :delete, 
+        :confirm => "Are you sure?"%>
+        </li></br>
+      <% end %>
+    <% end %>
     
   </ul>
 </nav>
