@@ -1,6 +1,5 @@
 
 <% content_for :sidebar do %>
-  <%= render "layouts/nav_main" %>
   <%= render "layouts/nav_patient" %>
 <% end %>
 <h3><%= @patient.f_name%> <%=@patient.s_name %> treatment record</h3>
@@ -17,6 +16,7 @@
         <th> <%= sort_link @search, :created_at, "Date" %></th>
         <th> <%= sort_link @search, :user_id, "Treated By" %></th>
         <th>Treatment</th>
+        <th>Action </th>
       </tr>
     <%= render @treatments %>
     </table>

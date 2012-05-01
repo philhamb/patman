@@ -1,21 +1,58 @@
 <nav>
   <ul>
+    <% if signed_in? %>
+      <li><%= link_to_unless_current("Users", users_path) %></li></br>
+      
+      <li><%= link_to "Sign out", signout_path, :method => :delete %></li></br>
+    <% else %>
+      <li><%= link_to "Sign in", signin_path %></li>
+    <% end %>
+  <hr/>  
+    <% if signed_in? %>
+      <li><%= link_to_unless_current("Patients", patients_path) %></li></br>
+      <li><%= link_to_unless_current("New patient", new_patient_path) %></li></br>
+    <% end %>
     
-    <li><%= link_to_unless_current("Patient Details",  patient_path(@evaluation.patient))%>
+    <li><%= link_to_unless_current("Show",  patient_path(@evaluation.patient))%>
     </li></br>
-    <li><%= link_to_unless_current("Edit Patient", edit_patient_path(@patient))%> 
+    <li><%= link_to_unless_current("Edit", edit_patient_path(@patient))%> 
     </li></br>
     <% if current_user.admin? %>
-      <li><%= link_to "Delete Patient", @patient, :method => :delete, 
+      <li><%= link_to "Delete", @patient, :method => :delete, 
          :confirm => "You sure?", :title => "Delete #{@evaluation.patient.f_name} 
          #{@evaluation.patient.s_name}"%> </li></br>
     <% end %>
-    <% unless(@evaluation.patient.treatments).blank? %>
-      <li><%= link_to_unless_current("Treatments", patient_treatments_path(@evaluation.patient))%>
+  <hr/>
+  
+  <% unless(@evaluation.patient.evaluations).blank? %>
+      <li><%= link_to_unless_current("Evaluations", 
+                                     patient_evaluations_path(@evaluation.patient))%>
       </li></br>
     <% end %>
-    <li><%= link_to_unless_current("New Treatment",new_patient_treatment_path(@evaluation.patient))%>
+    <li><%= link_to_unless_current("New ",
+                                   new_patient_evaluation_path(@evaluation.patient))%>
     </li></br>
+   <% if(@patient).blank? %>
+      <li> <%= link_to_unless_current("Edit ", edit_evaluation_path(@evaluation)) %>
+      </li></br>
+      <li> <%= link_to_unless_current("Show ", evaluation_path(@evaluation)) %>
+      </li></br>
+    <% end %>
+    <% if current_user.admin? %>
+        <li> <%= link_to "Delete", @evaluation, :method => :delete, 
+        :confirm => "Are you sure?"%>
+    <% end %>
+        </li></br>
+  <hr/>   
+    <% unless(@evaluation.patient.treatments).blank? %>
+      <li><%= link_to_unless_current("Treatments", 
+                                      patient_treatments_path(@evaluation.patient))%>
+      </li></br>
+    <% end %>
+    <li><%= link_to_unless_current("New Treatment",
+                                    new_patient_treatment_path(@evaluation.patient))%>
+    </li></br>
+   <hr/>  
     
   </ul>
 </nav>

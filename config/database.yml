@@ -16,7 +16,17 @@ test:
   timeout: 5000
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+ # adapter: sqlite3
+  #database: db/production.sqlite3
+ # pool: 5
+ # timeout: 5000
+  
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: Clinic
   pool: 5
+  username: root
+  password: wtsmg05
+  socket: /var/run/mysqld/mysqld.sock
   timeout: 5000

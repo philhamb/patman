@@ -1,7 +1,13 @@
  <tr>
  <td><%= link_to treatment.created_at.strftime("%e/%m/%Y "), [treatment], :action => :show %> </td>
- <td >  <%= treatment.user.name %> </td>
- <td><%= treatment.treatment %><%= link_to "Edit", (edit_treatment_path(treatment)) %></td>
+ <td><%= treatment.user.name %> </td>
+ <td><%= treatment.treatment %> </td>
+ <td><%= link_to "Edit", (edit_treatment_path(treatment))%> &nbsp;
+    <%= link_to "Delete", treatment, :method => :delete, :confirm => "Are you sure?",
+             :title => "Delete Treatment dated 
+             #{treatment.created_at.strftime("%e/%m/%Y ")} for 
+             #{treatment.patient.full_name}" %></td>
+ 
  </tr>
  
   

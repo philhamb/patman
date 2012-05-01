@@ -21,6 +21,8 @@ group :test do
   gem 'webrat', '0.7.1'
   gem 'factory_girl_rails', '1.0'
   gem 'guard-rspec' 
- 
-  
+end
+
+group  :producion do
+  gem 'ruby-mysql'
 end
