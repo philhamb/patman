@@ -51,8 +51,7 @@ ActiveRecord::Schema.define(:version => 20120228081706) do
     t.datetime "updated_at"
   end
 
-  add_index "treatments", ["created_at"], :name => "index_treatments_on_created_at"
-  add_index "treatments", ["user_id"], :name => "index_treatments_on_user_id"
+  add_index "treatments", ["patient_id", "user_id", "created_at"], :name => "index_treatments_on_patient_id_and_user_id_and_created_at"
 
   create_table "users", :force => true do |t|
     t.string   "name"
