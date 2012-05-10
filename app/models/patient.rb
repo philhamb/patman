@@ -41,9 +41,9 @@ class Patient < ActiveRecord::Base
   validate   :dob_future 
   validates  :dob,         :presence  => true
   validates  :mobile_no,   :length    => { :in => 7..19 }, 
-                                          :if => "!mobile_no.nil?"
+                            :unless => Proc.new { |a| a.mobile_no.blank? }
   validates  :landline_no, :length    => { :in => 7..19 }, 
-                                          :if => "!landline_no.nil?"
+                            :unless => Proc.new { |a| a.landline_no.blank? }
   validates  :gender,      :inclusion => { :in => %w(male female) }
   validates  :occupation,  :length    => { :maximum => 200 }
   validates  :interests,   :length    => { :maximum => 200 }
