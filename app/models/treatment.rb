@@ -21,7 +21,9 @@ class Treatment < ActiveRecord::Base
   validates :notes, :presence => true
   validates :patient_id, :presence => true
   
-  
+ 
+  scope :today, lambda { where("created_at > ? AND  created_at < ?", 
+                        Time.now.at_beginning_of_day, Time.now.tomorrow.at_beginning_of_day) }
   
  
    

@@ -43,6 +43,21 @@ describe Treatment do
       @Treatment.patient.should == @patient
     end
   end
+  
+  
+  describe "todays treatments" do
+
+   
+
+    it "should return treatments done today" do
+    @today_treatment= @patient.treatments.create!(@attr)
+    Treatment.today.first[:id].should == @today_treatment.id
+    end
+    
+    
+    
+    
+  end
 end
 
 
