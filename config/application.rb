@@ -39,6 +39,6 @@ module Patman
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
     # Assets pipeline disabled for now
-    config.assets.enabled = false
+    config.assets.enabled = true
   end
 end
