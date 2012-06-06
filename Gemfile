@@ -5,7 +5,7 @@ gem 'sqlite3', '1.3.4'
 gem 'gravatar_image_tag', '1.0.0.pre2'
 gem 'will_paginate', '3.0.pre2'
 gem 'meta_search'
-
+gem 'jquery-rails'
 
 
 
@@ -26,5 +26,5 @@ group :test do
 end
 
 group  :producion do
-  gem 'ruby-mysql'
+
 end
