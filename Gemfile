@@ -6,11 +6,18 @@ gem 'gravatar_image_tag', '1.0.0.pre2'
 gem 'will_paginate', '3.0.pre2'
 gem 'meta_search'
 gem 'jquery-rails'
+gem 'thin'
 
+# Rails 3.1 - Asset Pipeline
+gem 'json'
+gem 'sass'
+gem 'coffee-script'
+gem 'uglifier'
 
 
 
 group :development do
+  
   gem 'rspec-rails', '2.6.1'
   gem 'annotate', '2.4.0'
   gem 'faker', '0.3.1'
@@ -26,5 +33,6 @@ group :test do
 end
 
 group  :producion do
+
 
 end

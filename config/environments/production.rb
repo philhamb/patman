@@ -2,6 +2,11 @@ Patman::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # The production environment is meant for finished, "live" apps.
+  
+  # Compress both stylesheets and JavaScripts
+  config.assets.js_compressor  = :uglifier
+  config.assets.css_compressor = :scss
+  
   # Code is not reloaded between requests
   config.cache_classes = true
 
