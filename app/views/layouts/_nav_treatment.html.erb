@@ -15,7 +15,7 @@
     
     <li><%= link_to_unless_current("Show",  patient_path(@treatment.patient))%>
     </li></br>
-    <li><%= link_to_unless_current("Edit", edit_patient_path(@patient))%> 
+    <li><%= link_to_unless_current("Edit", edit_patient_path(@treatment.patient))%> 
     </li></br>
     <% if current_user.admin? %>
       <li><%= link_to "Delete", @patient, :method => :delete, 
