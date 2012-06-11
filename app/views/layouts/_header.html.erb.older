@@ -1,0 +1,5 @@
+<header>
+  <%= image_tag("osteo-web-small.jpg", :alt => "Osteopath Centre", :class => "round") %>
+</header>
+
+
