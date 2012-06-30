@@ -1,13 +1,6 @@
 <nav>
   <ul>
-    <% if signed_in? %>
-      <li><%= link_to_unless_current("Users", users_path) %></li></br>
-      
-      <li><%= link_to "Sign out", signout_path, :method => :delete %></li></br>
-    <% else %>
-      <li><%= link_to "Sign in", signin_path %></li>
-    <% end %>
-  <hr/>  
+    
     <% if signed_in? %>
       <li><%= link_to_unless_current("Patients", patients_path) %></li></br>
       <li><%= link_to_unless_current("New patient", new_patient_path) %></li></br>

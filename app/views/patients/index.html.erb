@@ -1,19 +1,12 @@
+
 <% content_for :sidebar do %>
   <%= render "layouts/nav_main" %>
 <% end %>
-<h2>All patients</h2>
-  
- <%= form_for @search do |f| %>
-  
-      <%= f.label :full_name_like, "First or Surname" %>
-      <%= f.text_field :f_name_or_s_name_contains, :size => 15 %>
-      
-      
+<h3>Patients <% if @search.f_name_or_s_name_contains.blank? %> :All </h3> 
+  <% else %>
+    <h4>First or Surname contains " <%= @search.f_name_or_s_name_contains %> " </h4>
+  <% end %>
     
-    
-      <%= f.submit "Search" %>
-    
-<% end %>
 </br>
 <% unless @patients.empty? %>
 <%= will_paginate @patients %>
