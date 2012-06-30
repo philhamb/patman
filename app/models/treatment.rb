@@ -23,8 +23,14 @@ class Treatment < ActiveRecord::Base
   
  
   scope :today, lambda { where("created_at > ? AND  created_at < ?", 
-                        Time.now.at_beginning_of_day, Time.now.tomorrow.at_beginning_of_day) }
-  
+                        Time.now.at_beginning_of_day, Time.now) }
+  scope :yesterday, lambda { where("created_at > ? AND  created_at < ?", 
+                        Time.now.yesterday.at_beginning_of_day, Time.now.yesterday.end_of_day) }                        
+  scope :this_week, lambda { where("created_at > ? AND  created_at < ?",
+                       Time.zone.now.at_beginning_of_week,  Time.zone.now) }
+                       
+  scope :this_month, lambda { where("created_at > ? AND  created_at < ?",
+                       Time.zone.now.at_beginning_of_month,  Time.zone.now) }                       
  
    
 end
