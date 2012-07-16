@@ -25,12 +25,8 @@
       </div>
       <div class="span-6 last" id="sidebar">
         <section class= "round">
-          <%= form_tag patients_path(@search), :method => :get, :id => 'search' do %>
-            <%= search_field_tag 'search[f_name_or_s_name_contains]',
-              nil, :placeholder => 'Search patients', 
-              :size => 10 %>
-           
-          <% end %>
+          
+          <%= render '/layouts/search_box'%>
           <%= yield :sidebar %>
         </section>
       </div> 

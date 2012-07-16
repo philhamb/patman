@@ -1,8 +1,7 @@
+
 <nav>
   <ul>
-    
-    
-    <% if signed_in? %>
+   <% if signed_in? %>
       <li><%= link_to_unless_current("Patients", patients_path) %></li></br>
       <li><%= link_to_unless_current("New patient", new_patient_path) %></li></br>
     <% end %>

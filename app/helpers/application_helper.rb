@@ -1,6 +1,6 @@
 module ApplicationHelper
   def logo 
-    logo = image_tag("osteo-web-small.jpg", :alt => "Osteopath Centre", :class => "round") 
+    logo = image_tag("osteopath_logo.jpg", :alt => "Osteopath Centre", :class => "round") 
   end
   # Return a title on a per-page basis.
   def title
