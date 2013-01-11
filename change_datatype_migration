@@ -1,0 +1,20 @@
+rails g migration change_data_type_for_fieldname
+Then edit the migration to use change_table:
+
+class ChangeDataTypeForFieldname < ActiveRecord::Migration
+  def self.up
+    change_table :tablename do |t|
+      t.change :fieldname, :date
+    end
+  end
+  def self.down
+    change_table :tablename do |t|
+      t.change :fieldname, :datetime
+    end
+  end
+end
+Then run the migration:
+
+rake db:migrate
+
+change_column :questions, :content, :text, :limit => nil
