@@ -1,14 +1,12 @@
 Patman::Application.routes.draw do
 
-  shallow do
-    resources :users
-    resources :sessions, :only => [:new, :create, :destroy]
-    resources :patients do
-      resources :treatments do
-      resources :evaluations do
-      end
-      end
-    end
+  
+  resources :users
+  resources :sessions, :only => [:new, :create, :destroy]
+  resources :patients, :shallow => true do
+    resources :treatments
+    resources :evaluations
+    
   end
    
   
