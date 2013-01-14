@@ -4,10 +4,8 @@ Patman::Application.routes.draw do
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
   resources :patients, :shallow => true do
-    resources :treatments do
-    resources :evaluations do
-    end
-    end
+    resources :treatments 
+    resources :evaluations 
     
   end
    
