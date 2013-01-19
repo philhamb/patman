@@ -60,6 +60,8 @@ class Patient < ActiveRecord::Base
     errors.add(:dob, "Patient cannot be over 150 years old")if !dob.blank? and dob < 150.years.ago.to_date
   end
   
+ 
+  
 end
 
 

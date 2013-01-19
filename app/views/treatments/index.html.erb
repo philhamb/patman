@@ -13,7 +13,7 @@
   <%= will_paginate @treatments %>
     <table class="main">
       <tr>
-        <th> <%= sort_link @search, :created_at, "Date" %></th>
+        <th> <%= sort_link @search, :created_at, "Date", :default_order => :desc %></th>
         <th> <%= sort_link @search, :user_id, "Treated By" %></th>
         <th>Treatment</th>
         <th>Action </th>

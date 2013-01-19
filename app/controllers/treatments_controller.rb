@@ -14,7 +14,7 @@ before_filter :admin_user,   :only => :destroy
       @title = "Treatment Record"
       @search = @patient.treatments.includes(:user).search(params[:search])
       @treatments = @search.relation.paginate :per_page =>  10,
-                   :page => params[:page]
+                   :page => params[:page], :order => "created_at desc"
       @number = @patient.treatments.count
       @last_treatment = @treatments.first.created_at
      

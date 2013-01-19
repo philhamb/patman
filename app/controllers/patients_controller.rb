@@ -15,7 +15,9 @@ before_filter :admin_user,   :only => :destroy
     
     
     
-    @patients = @search.relation.paginate(:page => params[:page], :per_page => 8)
+    @patients = @search.relation.paginate(:page => params[:page], :per_page => 8,
+                  :order=> "created_at desc")
+                
       if @patients.empty?
       flash.now[:notice] = "No patient found"
     end
