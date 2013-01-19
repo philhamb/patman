@@ -22,7 +22,7 @@ class Patient < ActiveRecord::Base
                   :mobile_no, :landline_no, :occupation,
                   :interests, :gender 
 
-  has_many  :users,       :through   => :treatments
+  #has_many  :users,       :through   => :treatments
   has_many  :treatments,  :dependent => :destroy
   has_many  :evaluations, :dependent => :destroy
   

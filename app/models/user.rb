@@ -29,8 +29,9 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation
   
   has_many :evaluations
+  #has_many :patients, :through => :evaluations
   has_many :treatments
-  has_many :patients, :through => :treatments
+  #has_many :patients , :through => :treatments
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 

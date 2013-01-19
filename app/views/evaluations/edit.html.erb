@@ -8,7 +8,7 @@
 <%= form_for([@patient, @evaluation]) do |f| %>
    <%= render 'fields', :f => f %>
    <%= f.submit "Update Evaluation" %>
-   <%=  link_to "Cancel", patient_path(@patient) %>
+   <%=  link_to "Cancel", patient_path(@evaluation.patient) %>
 <% end %>
  
     

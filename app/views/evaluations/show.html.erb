@@ -1,5 +1,5 @@
 <% content_for :sidebar do %>
- <%= render "layouts/nav_evaluation" %>
+  <%= render "layouts/nav_evaluation" %>  
 <% end %>
 <h3> Evaluation for <%= @evaluation.patient.full_name %></h3>
  <p> Date: <%=  @evaluation.created_at.strftime("%e/%m/%Y ") %> by 
