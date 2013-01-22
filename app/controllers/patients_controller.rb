@@ -2,6 +2,7 @@ class PatientsController < ApplicationController
 before_filter :authenticate
 before_filter :admin_user,   :only => :destroy
 
+
   def new
     @patient = Patient.new
     @title   = "New Patient"
@@ -62,8 +63,10 @@ before_filter :admin_user,   :only => :destroy
   
    def destroy
     Patient.find(params[:id]).destroy
+    
     flash[:success] = "Patient destroyed."
-    redirect_to patients_path
+    redirect_to(patients_path)
+    
   end
 
  private

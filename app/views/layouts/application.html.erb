@@ -6,11 +6,14 @@
     <%= stylesheet_link_tag "vendor", :media => "screen" %>
     <%= stylesheet_link_tag "application", :media => "screen" %>
     <%= stylesheet_link_tag "vendor-print", :media => "print" %>
+    
     <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag 'jquery_ujs' %>
     <%= csrf_meta_tag %>
     <%= render 'layouts/shim' %>
   </head>
   <body>
+  
     <div class="container">
      <div class="span-24" id="head">
        <%= render 'layouts/header' %>
