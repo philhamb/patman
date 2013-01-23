@@ -12,12 +12,12 @@
     <li><%= link_to_unless_current("Edit", edit_patient_path(@patient))%> 
     </li></br>
     <% if current_user.admin? %>
-      <li><%= link_to "Delete", :patient, :method => :delete,
+      <li><%= link_to "Delete", @patient, :method => :delete,
       :confirm =>"Are you sure?" %> </li></br>
     <% end %>
   <hr/> 
     <% unless(@patient.treatments).blank? %>
-      <li><%= link_to_unless_current("Treatments", patient_treatments_path(@patient))%>
+      <li><%= link_to_unless_current("Treatments",  patient_treatments_path(@patient))%>
       </li></br>
     <% end %>
     <li><%= link_to_unless_current("New Treatment",new_patient_treatment_path(@patient))%>

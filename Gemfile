@@ -12,7 +12,7 @@ gem 'rspec-rails', '2.8.1', :group => [:development, :test]
 
 # Rails 3.1 - Asset Pipeline
 group :assets do
- # gem 'json'
+# gem 'json'
   gem 'sass'
   gem 'coffee-rails'
   gem 'uglifier'
